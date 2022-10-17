@@ -1,0 +1,287 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{SourceSansPro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Практическая работа 4. Генерация распределений. Проверка определений известных распределений},
+  pdfauthor={Юрченков Иван Александрович, ассистент кафедры ПМ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Практическая работа 4. Генерация распределений. Проверка
+определений известных распределений}
+\author{Юрченков Иван Александрович, ассистент кафедры ПМ}
+\date{2022-10-07}
+
+\begin{document}
+\maketitle
+
+\hypertarget{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}{%
+\section{\texorpdfstring{\textbf{Постановка
+задачи}}{Постановка задачи}}\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Сгенерировать выборку нормального распределения
+  \(\ Y\sim N(\mu, \sigma^2)\ \) используя определение центральной
+  предельной теоремы}.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  На основе \(\ n \approx 10\div 20\ \) равномерно распределенных
+  случайных реализаций случайных величин образовать новую выборку по
+  определению центральной предельной теоремы.
+\end{itemize}
+
+Если \(\ Y_{i} \sim U(a_i, b_i), \ i = 1, 2, \dots, n\ \), где
+\(\ Y_{i}\ -\) равномерно распределенная реализация случайной величины
+со случайными параметрами
+\(\ a_i \in \mathbb{R},\ b_i \in \mathbb{R}\ \), то ожидаемая нормально
+распределенная величина \(\ Y\ \) будет найдена как:
+
+\[
+Y = \sum_{i=1}^{n} Y_i, \ i=1,2,\dots, n
+\]
+
+\begin{itemize}
+\item
+  Для получившейся выборки построить гистограмму, визуализировать на
+  гистограмме теоретическую плотность нормального распределения по
+  несмещенным точечным оценкам \(\ \hat{\mu}, \hat{\sigma}\ \).
+\item
+  Провести тест на нормальное распределение с помощью критерия
+  \(\ \chi^2\)-Пирсона. Степени свободы рассчитывать как
+  \(\ k = n - 1\ \).
+\end{itemize}
+
+Для генерации выборок рекомендуется пользоваться встроенными в
+компьютерные статистические пакеты функциями генерации
+\textbf{равномерно распределённых случайных величин}, которые задаются с
+помощью параметров границ интервала генерации чисел \(a\) и \(b\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Сгенерировать выборку \(\ \chi^2\)-распределения
+  \(\ R \sim \chi_{k}^2\ \) используя определение распределения
+  \(\ \chi^2\ \)}.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  На основе \(\ Z\)-оценок нормально распределенных случайных реализаций
+  случайных величин \(\ L_{i} \sim N(\mu_i, \sigma_i^2)\ \) образовать
+  новую выборку по определению \(\ \chi^2\)-распределения:
+\end{itemize}
+
+\[
+R = \sum_{i = 1}^{n} Z[L_i]^2,\ \ Z[L_i] = \frac{L - E[L]}{\sigma[L]}, \ L_i \sim N(\mu_i, \sigma_i^2),\ i = 1,2,\dots,n
+\]
+
+\begin{itemize}
+\item
+  Для получившейся выборки построить гистограмму, визуализировать на
+  гистограмме теоретическую плотность \(\ \chi_k^2\ \) распределения c
+  \(\ k = n-1\ \) степенями свободы.
+\item
+  Провести тест на \(\ \chi^2\ \) с помощью критерия
+  \(\ \chi^2\)-Пирсона.
+\end{itemize}
+
+Для генерации \textbf{нормально распределенных реализаций} случайных
+величин рекомендуется пользоваться встроенными в статистические пакеты
+функциями для генерации значений выборки из нормального распределения,
+которые задаются с помощью параметров математического ожидания \(\mu\) и
+стандатрного отклонения \(\sigma^2\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Сгенерировать выборку распределения Фишера на основе
+  определения}.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  На основе двух случайных реализаций \(\ Y_1, Y_2\ \) случайных
+  величин, распределенных по \(\chi^2\)-распределению со степенями
+  свободы \(\ d1, d2\ \) соответственно, сгенерировать выборку,
+  распределенную по распределению Фишера \(\ S \sim F(d1, d2)\ \) в
+  соответствии с определением:
+\end{itemize}
+
+\[
+S = \frac{Y_1 / d_1}{Y_2 / d_2}, \ S\sim F(d_1, d_2).
+\]
+
+\begin{itemize}
+\item
+  Для получившейся выборки построить гистограмму, визуализировать на
+  гистограмме теоретическую плотность \(\ F(d1, d2)\ \) распределения.
+\item
+  Провести тест на распределение Фишера с помощью критерия
+  \(\ \chi^2\)-Пирсона.
+\end{itemize}
+
+Для генерации выборки фиксированного размера из распределения \(\chi^2\)
+рекомендуется пользоваться встроенными в статистические пакеты функциями
+для генерации случайных выборок из распределения \(\chi^2\) с \(df\)
+степенями свободы.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \textbf{Сгенерировать выборку t-распределения на основе определения}.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  На основе \(\ n \approx 2\div 8\ \) случайных реализаций
+  \(\ Y_1, Y_2, \dots, Y_n\ \) случайных величин, распределенных по
+  стандартному нормальному распределению
+  \(\ Y_i \sim N(0, 1), \ i = 1, 2, \dots, n\ \), сгенерировать выборку
+  \(\ T \sim t(n)\ \), распределенную по \(t\)-распределению Стьюдента с
+  \(\ df = n\ \) степенями свободы в соответствии с определением:
+\end{itemize}
+
+\[
+T = \frac{Y_0}{\sqrt{\frac{1}{n} \sum_{i=1}^{n} Y_i^2}}, \quad Y_0 \sim N(0, 1).
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Реализовать вычисление аналитической плотности \(t\)-распределения
+  Стьюдента с использованием бета-функции:
+\end{itemize}
+
+\[
+{\displaystyle p_{t}(x\ |\ n)={\frac {1}{{\sqrt {n}}\,\mathrm {B} ({\frac {1}{2}},{\frac {n}{2}})}}\left(1+{\frac {x^{2}}{n}}\right)^{\!-{\frac {n+1}{2}}}},
+\] где
+
+\[
+{\displaystyle \mathrm {B} (x,y)=\int \limits _{0}^{1}t^{x-1}(1-t)^{y-1}\,dt,}
+\]
+
+определённая при \({\displaystyle \operatorname {Re} x>0}\),
+\({\displaystyle \operatorname {Re} y>0}\).
+
+\begin{itemize}
+\item
+  Для получившейся выборки построить гистограмму, визуализировать на
+  гистограмме теоретическую плотность \(\ t(n)\ \).
+\item
+  Для получившейся выбрки провести тест на \(t\)-распределение Стьюдента
+  с помощью критерия \(\ \chi^2\)-Пирсона, используя в качестве функции
+  вероятности распределения \(\ P_t(x\ |\ n)\):
+\end{itemize}
+
+\[
+P_t(x\ |\ n) = \int_{-\infty}^{x} p_t(z\ |\ n) dz.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Для всех заданий количество генерируемых значений выборки установить
+  равным \(N \approx 100 \div 1000\). Уровень надежности для критерия
+  \(\chi^2\)-Пирсона или метода анаморфоз \(\gamma = 0.95\).
+\end{enumerate}
+
+\hypertarget{ux432ux43eux43fux440ux43eux441ux44b-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}{%
+\section{\texorpdfstring{\textbf{Вопросы на защиту практической
+работы}}{Вопросы на защиту практической работы}}\label{ux432ux43eux43fux440ux43eux441ux44b-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Центральная предельная теорема. Реализации случайно распределенных
+  величин. Независимые величины. Степени свободы суммы независимо
+  распределенных величин.
+\item
+  Определение нормального распределения. Спрямление для координат
+  нормального распределения. Определение параметров нормального
+  распределения через точечные оценки. Определение параметров
+  нормального распределения, образованного суммой независимых величин,
+  через ЦПТ.
+\item
+  Определение распределения Фишера. Аналитические формулы
+  математического ожидания и дисперсии расределения Фишера.
+\item
+  t-распределение Стьюдента. Аппроксимации и определение функции
+  плотности. Смесь нормально расределенных величин. Определение
+  \(Z\)-оценок.
+\end{enumerate}
+
+\end{document}

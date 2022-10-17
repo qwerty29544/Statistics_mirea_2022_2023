@@ -1,0 +1,533 @@
+---
+title: "Практическая работа 4. Генерация распределений. Проверка определений известных распределений"
+author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
+date: "`r Sys.Date()`"
+mainfont: SourceSansPro
+output:
+  pdf_document: 
+    latex_engine: lualatex
+    keep_tex: yes
+    highlight: haddock
+    fig_width: 8
+    fig_height: 7.5
+    fig_caption: yes
+---
+
+```{r, echo=FALSE, results='hide', error=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, dev="cairo_pdf", dpi = 500, out.width="60%", fig.align='center')
+library(dplyr)
+library(stringr)
+```
+
+# **Постановка задачи**
+
+1. **Сгенерировать выборку нормального распределения $\ Y\sim N(\mu, \sigma^2)\ $ используя определение центральной предельной теоремы**. 
+
+- На основе $\ n \approx 10\div 20\ $ равномерно распределенных случайных реализаций случайных величин образовать новую выборку по определению центральной предельной теоремы. 
+
+Если $\ Y_{i} \sim U(a_i, b_i), \ i = 1, 2, \dots, n\ $, где $\ Y_{i}\ -$ равномерно распределенная реализация случайной величины со случайными параметрами $\ a_i \in \mathbb{R},\ b_i \in \mathbb{R}\ $, то ожидаемая нормально распределенная величина $\ Y\ $ будет найдена как:
+
+$$
+Y = \sum_{i=1}^{n} Y_i, \ i=1,2,\dots, n
+$$
+
+- Для получившейся выборки построить гистограмму, визуализировать на гистограмме теоретическую плотность нормального распределения по несмещенным точечным оценкам $\ \hat{\mu}, \hat{\sigma}\ $.
+
+- Провести тест на нормальное распределение с помощью критерия $\ \chi^2$-Пирсона. Степени свободы рассчитывать как $\ k = n - 1\ $.
+
+- Качественно определить влияние числа сгенерированных равномерно распределенных величин на итоговое качество генерации нормального распределения при помощи взятия 3 тестовых генераций при разных $n$ и проведения теста на распределение.
+
+Для генерации выборок рекомендуется пользоваться встроенными в компьютерные статистические пакеты функциями генерации **равномерно распределённых случайных величин**, которые задаются с помощью параметров границ интервала генерации чисел $a$ и $b$.
+
+2. **Сгенерировать выборку $\ \chi^2$-распределения $\ R \sim \chi_{k}^2\ $ используя определение распределения $\ \chi^2\ $**. 
+
+- На основе $\ Z$-оценок нормально распределенных случайных реализаций случайных величин $\ L_{i} \sim N(\mu_i, \sigma_i^2)\ $ образовать новую выборку по определению $\ \chi^2$-распределения:
+
+$$
+R = \sum_{i = 1}^{n} Z[L_i]^2,\ \ Z[L_i] = \frac{L - E[L]}{\sigma[L]}, \ L_i \sim N(\mu_i, \sigma_i^2),\ i = 1,2,\dots,n
+$$
+
+- Для получившейся выборки построить гистограмму, визуализировать на гистограмме теоретическую плотность $\ \chi_k^2\ $ распределения c $\ k = n-1\ $ степенями свободы.
+
+- Провести тест на $\ \chi^2\ $ с помощью критерия $\ \chi^2$-Пирсона.
+
+Для генерации **нормально распределенных реализаций** случайных величин рекомендуется пользоваться встроенными в статистические пакеты функциями для генерации значений выборки из нормального распределения, которые задаются с помощью параметров математического ожидания $\mu$ и стандатрного отклонения $\sigma^2$.
+
+3. **Сгенерировать выборку распределения Фишера на основе определения**. 
+
+- На основе двух случайных реализаций $\ Y_1, Y_2\ $ случайных величин, распределенных по $\chi^2$-распределению со степенями свободы $\ d_1, d_2\ $ соответственно, сгенерировать выборку, распределенную по распределению Фишера $\ S \sim F(d_1, d_2)\ $ в соответствии с определением:
+
+$$
+S = \frac{Y_1 / d_1}{Y_2 / d_2}, \ S\sim F(d_1, d_2).
+$$
+
+- Для получившейся выборки построить гистограмму, визуализировать на гистограмме теоретическую плотность $\ F(d_1, d_2)\ $ распределения.
+
+- Провести тест на распределение Фишера с помощью критерия $\ \chi^2$-Пирсона.
+
+Для генерации выборки фиксированного размера из распределения $\chi^2$ рекомендуется пользоваться встроенными в статистические пакеты функциями для генерации случайных выборок из распределения $\chi^2$ с $df$ степенями свободы.
+
+4. **Сгенерировать выборку t-распределения на основе определения**. 
+
+- На основе $\ n \approx 2\div 8\ $ случайных реализаций $\ Y_1, Y_2, \dots, Y_n\ $ случайных величин, распределенных по стандартному нормальному распределению $\ Y_i \sim N(0, 1), \ i = 1, 2, \dots, n\ $, сгенерировать выборку $\ T \sim t(n)\ $, распределенную по $t$-распределению Стьюдента с $\ df = n\ $ степенями свободы в соответствии с определением:
+
+$$
+T = \frac{Y_0}{\sqrt{\frac{1}{n} \sum_{i=1}^{n} Y_i^2}}, \quad Y_0 \sim N(0, 1).
+$$
+
+- Реализовать вычисление аналитической плотности $t$-распределения Стьюдента с использованием бета-функции:
+
+$$
+{\displaystyle p_{t}(x\ |\ n)={\frac {1}{{\sqrt {n}}\,\mathrm {B} ({\frac {1}{2}},{\frac {n}{2}})}}\left(1+{\frac {x^{2}}{n}}\right)^{\!-{\frac {n+1}{2}}}},
+$$
+где
+
+$$
+{\displaystyle \mathrm {B} (x,y)=\int \limits _{0}^{1}t^{x-1}(1-t)^{y-1}\,dt,}
+$$
+
+определённая при ${\displaystyle \operatorname {Re} x>0}$, ${\displaystyle \operatorname {Re} y>0}$. 
+
+
+- Для получившейся выборки построить гистограмму, визуализировать на гистограмме теоретическую плотность $\ t(n)\ $.
+
+- Для получившейся выбрки провести тест на $t$-распределение Стьюдента с помощью критерия $\ \chi^2$-Пирсона, используя в качестве функции вероятности распределения $\ P_t(x\ |\ n)$:
+
+
+$$
+P_t(x\ |\ n) = \int_{-\infty}^{x} p_t(z\ |\ n) dz.
+$$
+
+
+5. Для всех заданий количество генерируемых значений выборки установить равным $N \approx 100 \div 1000$. Уровень надежности для критерия $\chi^2$-Пирсона или метода анаморфоз $\gamma = 0.95$.
+
+# **Пример генерации распределений**
+
+## **1. Генерация нормального распределения из суммы случайных реализаций равномерно распределенной случайной величины**
+
+```{r, echo=F, results='hide'}
+hist_table <- function(X_sample, groups = "Sturges") {
+  N <- length(X_sample)
+  if (stringr::str_to_lower(groups[1]) == "sturges") {
+    groups <- 1 + floor(log2(N))
+  }
+  
+  factor_groups <- cut(X_sample, groups)
+  table_cut <- table(factor_groups)
+  
+  Z <- names(table_cut) %>% 
+    stringr::str_replace_all(pattern = "[\\(\\]]", repl = "") %>% 
+    stringr::str_split(",") %>% 
+    unlist() %>% 
+    as.numeric()
+  
+  table_hist <- data.frame(groupnames = factor(x = names(table_cut), 
+                                                levels = levels(factor_groups)),
+                           abs_freq = as.numeric(table_cut),
+                           rel_freq = as.numeric(table_cut) / N,
+                           low = Z[seq(1, length(Z), 2)],
+                           high = Z[seq(2, length(Z), 2)],
+                           med = (Z[seq(1, length(Z), 2)] + Z[seq(2, length(Z), 2)]) / 2,
+                           h = (Z[seq(2, length(Z), 2)] - Z[seq(1, length(Z), 2)]))
+  return(table_hist)
+}
+```
+
+
+Центральная предельная теорема напрямую утверждает о том, что случайная величина, составленная в виде суммы $S = Y_1 + Y_2 + \dots Y_n$ сулчайных величин $Y_i$ с конечным математическим ожиданием $\mu$ и дисперсией $\sigma^2$, обладает свойством:
+
+$$
+  \frac{S - n\cdot \mu}{\sqrt{n} \cdot \sigma} \to N(0, 1), \quad n\rightarrow +\infty,
+$$
+где $N(0, 1)\ -$ стандартное нормальное распределение.
+
+В другой формулировке теоремы говорится о сумме величин с конечным **неодинаковым** математическим ожиданием $\mu_i$ и стандарным отклонением $\sigma_i$ для каждого члена суммы $S = \sum_{i=1}^nY_i, \ i=1,2,\dots, n$.
+
+**ЦПТ Линдеберга**
+
+Пусть независимые случайные величины $Y_{1},\ldots ,Y_{n},\ldots$ определены на одном и том же вероятностном пространстве и имеют конечные математические ожидания и дисперсии: ${\mathbb {E}}[X_{i}]=\mu _{i},\;{\mathrm {D}}[X_{i}]=\sigma _{i}^{2}$.
+
+Пусть $S_{n}=\sum \limits _{i=1}^{n}X_{i}$.
+
+Тогда ${\mathbb {E}}[S_{n}]=m_{n}=\sum \limits_{{i=1}}^{n}\mu_{i},\;{\mathrm {D}}[S_{n}]=s_{n}^{2}=\sum \limits_{{i=1}}^{n}\sigma _{i}^{2}$.
+
+И пусть выполняется условие Линдеберга:
+
+$$
+\forall \varepsilon >0,\;\lim \limits _{{n\to \infty }}\sum \limits _{{i=1}}^{n}{\mathbb {E}}\left[{\frac {(Y_{i}-\mu _{i})^{2}}{s_{n}^{2}}}\,{\mathbf {1}}_{{\{|X_{i}-\mu _{i}|>\varepsilon s_{n}\}}}\right]=0,
+$$
+где ${\mathbf {1}}_{{\{|X_{i}-\mu _{i}|>\varepsilon s_{n}\}}}$ функция — индикатор.
+
+Тогда
+
+$$
+{\frac {S_{n}-m_{n}}{s_{n}}}\to N(0,1)
+$$ 
+
+по распределению при $n\to \infty$.
+
+В простыми словами, данная формулировка ЦПТ говорит о том, что если сумма математических ожиданий квадратов $z$-оценок случайных величин $Y_i, \ i=1,2,\dots n$ в определенной окрестности в предеде $n \to +\infty$ стремится к нулю, то составленная случайная величина:
+
+$$
+S = \sum_{i=1}^{n} Y_i \sim N\left(\mu =\sum_{i=1}^n \mu_i, \sigma^2 = \sum_{i=1}^{n} \sigma_i^2\right),
+$$
+будет распределена нормально с математическим ожиданием $\mu = \sum_{i=1}^n \mu_i$ и стандартным отклонением $\sigma^2 = \sum_{i=1}^{n} \sigma_i^2$.
+
+Сгенерировав $n$ равномерных распределений $Y_i \sim Uniform(a_i, b_i), \ (a_i, b_i) \ in \mathbb{R}$ распределений, отобразим гистограмму полученной суммы их реализаций как отдельной случайной величины. На итоговом графике также отобразим $\mu$ и $\mu + (-3\sigma, -2\sigma, \dots, 3\sigma)$ значения, полученные напрямую из определения выше, изобразив их штриховой линией.
+
+```{r, echo=F}
+set.seed(123)
+
+n_distr <- 10
+N_members <- 1000
+matrix_param <- matrix(0, nrow=n_distr, ncol=2)
+normal_distrib <- 0
+mu_distrib <- 0
+var_distrib <- 0
+
+for (i in 1:n_distr) {
+   matrix_param[i, 1:2] <- runif(2, -10, 10)
+   new_unif <- runif(N_members, min = min(matrix_param[i, ]), max = max(matrix_param[i, ]))
+   mu_distrib <- mu_distrib + mean(new_unif)
+   var_distrib <- var_distrib + var(new_unif) 
+   normal_distrib <- normal_distrib + new_unif
+}
+
+
+table_normal <- hist_table(normal_distrib)
+grid <- seq(min(normal_distrib) - 1, max(normal_distrib) + 1, 0.001)
+theor_distr <- dnorm(grid, mean(normal_distrib), sd(normal_distrib))
+
+plot(table_normal$low, table_normal$rel_freq/table_normal$h, type="h",
+     main = paste0("Гистограмма нормально сгенерированной величины, n = ", n_distr),
+     xlab = "Группы выборки",
+     ylab = "Относительные частоты распределения",
+     xlim = c(min(table_normal$low), max(table_normal$high)),
+     ylim = c(0, max(theor_distr, table_normal$rel_freq/table_normal$h)))
+lines(table_normal$low, table_normal$rel_freq/table_normal$h, type="s")
+lines(table_normal$med, table_normal$rel_freq/table_normal$h, type="o", pch = 19)
+lines(max(table_normal$high), 
+      table_normal$rel_freq[nrow(table_normal)] / 
+        table_normal$h[nrow(table_normal)],
+      type = "h")
+segments(x0 = max(table_normal$low),
+         x1 = max(table_normal$high), 
+         y0 = table_normal$rel_freq[nrow(table_normal)]/table_normal$h[nrow(table_normal)],
+         y1 = table_normal$rel_freq[nrow(table_normal)]/table_normal$h[nrow(table_normal)])
+abline(h = 0)
+lines(grid, theor_distr, col = "blue")
+legend(x = min(table_normal$low),
+       y = max(theor_distr, table_normal$rel_freq/table_normal$h),
+       legend = c("Гистограмма", "Теор. распр."),
+       col = c("black", "blue"),
+       lty = c(1, 1))
+abline(v = mu_distrib + sqrt(var_distrib) * (-3:3), col = abs(c(-3:-1, 5, 1:3)) * 2, lty = 2, lwd = I(0.5))
+grid()
+```
+
+Полученную гистограмму по её оцененным $\mu$ и $\sigma^2$ отобразим в спрямляющих координатах нормального распределения, где по оси $x$ отложены теоретические значения вероятности получения тех же значений, что и в исходной гистограмме, а по оси $y$ отобразим сгенерированные значения относительных частот при тех же значениях выборки и биссекрису.
+
+```{r}
+plot(theor_distr, theor_distr, col = "blue", type = "l",
+     main = "График QQPlot",
+     xlab = "Теоретические частоты",
+     ylab = "Выборочные частоты")
+points(dnorm(table_normal$med, mean(normal_distrib), sd(normal_distrib)), 
+       table_normal$rel_freq/table_normal$h, pch = 19)
+legend(x = 0, y = max(table_normal$rel_freq/table_normal$h),
+       legend = c("Теор. распределение",
+                  "Гистограмма"),
+       lty = c(1, 0),
+       col = c("blue", "black"),
+       pch = c(99, 19))
+grid()
+```
+
+По полученному спрямлению имеем возможность оценить близость полученных зависимостей на основе коэффициента детерминации, посчитав его относительно теоретической зависимости по оцененным параметрам $\hat{y} \sim N(\mu, \sigma^2)$ и практически полученных значений относительных частот, деленных на ширину интервалов по гистограмме $y_i = p_i / h$:
+
+$$
+R^2(y, \hat{y}) = 1 - \frac{\sum \limits_{i=1}^{g} (\hat{y}_i - y_i)^2}{\sum \limits_{i=1}^{g} (\hat{y}_i - E[\hat{y}])^2}.
+$$
+
+Полученное значение коэффициента $R^2(y, \hat{y})=$ `r round(cor(dnorm(table_normal$med, mean(normal_distrib), sd(normal_distrib)), table_normal$rel_freq/table_normal$h)^2, 2)`, что можно расценивать как положительный тест на нормальное распределение.
+
+
+
+## **2. Генерация $\chi^2$-Распределения по определению**
+
+Выборку реализации случайной величны распределенной по $\chi^2$-распределению можно получить из его определения:
+
+$$
+S = \sum_{i=1}^{n} Z[Y_i]^2,\quad  Y_i \sim N(\mu_i, \sigma_i^2), \quad i=1,2,\dots,n,
+$$
+где $Z[Y_i]\ -$ это $Z$-оценки соответсвующей реализации нормально распределенной случайной величины $Y_i \sim N(\mu_i, \sigma_i^2)$.
+
+Таким образом выборку $S$ мы можем получить сгенерировав $n$ выборок из нормального распределения $N(\mu_i, \sigma_i^2)$ со случайными параметрами $\Theta = (\mu_i, \sigma_i^2)$, получив из $Z$-оценки и сложив квадраты полученных значений выборок между собой соответственно.
+
+Проделав такую процедуру получим гистограмму сгенерированной выборки, на которую наложим визуализацию теоретических значений распределения $\chi^2$ со степенями свободы $df = n$.
+
+```{r}
+set.seed(104)
+n_distr <- 8
+N_members <- 1000
+matrix_param <- matrix(0, nrow=n_distr, ncol=2)
+chi_distrib <- 0
+
+for (i in 1:n_distr) {
+   matrix_param[i, 1:2] <- rnorm(2, 0, 1)
+   new <- rnorm(N_members, matrix_param[i, 1], abs(matrix_param[i, 2]))
+   new <- (new - mean(new))/sd(new)
+   chi_distrib <- chi_distrib + new^2
+}
+
+table_chi <- hist_table(chi_distrib)
+grid <- seq(0, qchisq(0.999, n_distr), 0.001)
+theor_chi <- dchisq(grid, n_distr)
+
+plot(table_chi$low, table_chi$rel_freq/table_chi$h, type="h",
+     main = paste0("Гистограмма chi^2 сгенерированной величины, n = ", n_distr),
+     xlab = "Группы выборки",
+     ylab = "Относительные частоты распределения",
+     xlim = c(min(table_chi$low), max(table_chi$high)),
+     ylim = c(0, max(theor_chi, table_chi$rel_freq/table_chi$h)))
+lines(table_chi$low, table_chi$rel_freq/table_chi$h, type="s")
+lines(table_chi$med, table_chi$rel_freq/table_chi$h, type="o", pch = 19)
+lines(max(table_chi$high), 
+      table_chi$rel_freq[nrow(table_chi)] / 
+        table_chi$h[nrow(table_chi)],
+      type = "h")
+segments(x0 = max(table_chi$low),
+         x1 = max(table_chi$high), 
+         y0 = table_chi$rel_freq[nrow(table_chi)]/table_chi$h[nrow(table_chi)],
+         y1 = table_chi$rel_freq[nrow(table_chi)]/table_chi$h[nrow(table_chi)])
+abline(h = 0)
+lines(grid, theor_chi, col = "blue")
+lines(table_chi$med, dchisq(table_chi$med, n_distr), 
+      type = "p", col = "blue", pch = 19)
+legend(x = quantile(table_chi$low, 0.75),
+       y = max(theor_chi, table_chi$rel_freq/table_chi$h),
+       legend = c("Гистограмма", "Теор. распр."),
+       col = c("black", "blue"),
+       lty = c(1, 1))
+grid()
+```
+
+Изобразим также этот график в новых координатах. Отложим по оси $x$ значения теоретической вероятности из функции плотности $\chi^2$-распределения. По оси $y$ отложим значения полученных относительных частот сгенерированной выборки. Получим спрямление, относительно линейности точек гистограммы которого можно судить о принадлежности выборки распределению.
+
+```{r}
+plot(theor_chi, theor_chi, col = "blue", type = "l",
+     main = "График QQPlot",
+     xlab = "Теоретические частоты",
+     ylab = "Выборочные частоты")
+points(dchisq(table_chi$med, n_distr), 
+       table_chi$rel_freq/table_chi$h, pch = 19)
+points(dchisq(table_chi$med, n_distr),
+       dchisq(table_chi$med, n_distr),
+       col = "blue",
+       pch = 19)
+legend(x = 0, y = max(table_chi$rel_freq/table_chi$h),
+       legend = c("Теор. распределение",
+                  "Гистограмма"),
+       lty = c(1, 0),
+       col = c("blue", "black"),
+       pch = c(99, 19))
+segments(x0 = dchisq(table_chi$med, n_distr),
+         x1 = dchisq(table_chi$med, n_distr),
+         y0 = dchisq(table_chi$med, n_distr),
+         y1 = table_chi$rel_freq/table_chi$h,
+         lty = 2,
+         lwd = 1.5)
+grid()
+```
+
+
+Коэффициент детерминации между значениями теоретического распределения и значениями частот гистограммы: $R^2(y, \hat{y}) =$ `r round(cor(dchisq(table_chi$med, n_distr-1), table_chi$rel_freq/table_chi$h)^2, 2)`.
+Значение является довольно высоким, что можно расценивать как положительный тест.
+
+## **3. Реализация распределения Фишера по определению**
+
+Распределение Фишера по определению является отношением реализаций двух случаных величин из $\chi^2$-распределения:
+
+$$
+S = \frac{Y_1/d_1}{Y_2/d_2} \sim F(d_1, d_2),\ \ Y_1 \sim \chi_{d_1}^2, \ Y_2 \sim \chi_{d_2}^2.
+$$
+
+Таким образом, можно получить выборку, распределенную по распределению Фишера $S \sim F(d_1, d_2)$ c $d_1$ и $d_2$ степенями свободы распределений выборок $Y_1$ и $Y_2$ соответственно. 
+
+Сгенерируем выборку на основе определения распределения Фишера при попощи сгенерированных выборок из распределения $\chi^2$ по $N$ значений с разными степенями свободы $d_1 = 20$, $d_2 = 9$:
+
+```{r}
+set.seed(123)
+d1 <- 20
+d2 <- 9
+N_members <- 200
+
+Y1 <- rchisq(N_members, d1)
+Y2 <- rchisq(N_members, d2)
+
+Fisher <- (Y1/d1) / (Y2/d2)
+table_fish <- hist_table(Fisher)
+Fisher_theor <- df(table_fish$med, d1, d2)
+grid <- seq(0, max(table_fish$high) + 1, 0.001)
+Fisher_distr <- df(grid, d1, d2)
+
+plot(table_fish$med, table_fish$rel_freq / table_fish$h, type = "o", pch = 19,
+     main = paste0("Распределение Фишера, d1 = ", d1, ", d2 = ", d2, ", N = ", N_members),
+     xlab = "Область определения случайной величины",
+     ylab = "Частоты случайной величины",
+     ylim = c(0, max(table_fish$rel_freq, Fisher_distr)),
+     xlim = c(0, max(table_fish$high)))
+lines(table_fish$low, table_fish$rel_freq / table_fish$h, type = "h", pch = 19)
+lines(table_fish$low, table_fish$rel_freq / table_fish$h, type = "s", pch = 19)
+lines(table_fish$med, Fisher_theor, type = "p", col = "blue", pch = 20)
+lines(grid, Fisher_distr, lty = 2, col = "blue")
+abline(h = 0, lty = 2, col = "red")
+abline(v = 0, lty = 2, col = "red")
+grid()
+legend(x = quantile(Fisher, 0.96), 
+       y = max(table_fish$rel_freq, Fisher_theor),
+       legend = c("Модель", "Плотность"),
+       lty = c(1, 2),
+       pch = c(19, 20),
+       col = c("black", "blue"))
+```
+
+Построим график в спрямляющих координатах по тому же принципу, что и раньше, по оси абсцисс откладываем значения теоретической плотности распределения Фишера, полученной при помощи встроенной в статистический пакет функции, а по оси ординат откладываем сгенерированную выборку распределения Фишера с $d_1$ и $d_2$ степенями свободы.
+
+```{r}
+plot(Fisher_distr, Fisher_distr, col = "blue", type = "l",
+     main = "График QQPlot",
+     xlab = "Теоретические частоты",
+     ylab = "Выборочные частоты")
+points(Fisher_theor, table_fish$rel_freq/table_fish$h, pch = 19)
+points(Fisher_theor, Fisher_theor, pch = 19, col = "blue")
+legend(x = 0, y = max(table_fish$rel_freq/table_fish$h, Fisher_distr),
+       legend = c("Теор. распределение",
+                  "Гистограмма"),
+       lty = c(1, 0),
+       col = c("blue", "black"),
+       pch = c(99, 19))
+
+segments(x0 = Fisher_theor,
+         x1 = Fisher_theor,
+         y0 = Fisher_theor,
+         y1 = table_fish$rel_freq/table_fish$h,
+         lty = 2,
+         lwd = 1.5)
+grid()
+```
+
+По спрямлению можно оценить коэффициент детерминации между прямой и данными и понять насколько зависимость близка к линейной, что будет говорить о принадлежности выборки к полученному распределению:
+$R^2(y, \hat{y}) =$ `r round(cor(Fisher_theor, table_fish$rel_freq/table_fish$h)^2, 2)`.
+Значение является довольно высоким, что можно расценивать как положительный тест.
+
+## 4. Реализация распределения Стьюдента по определению
+
+Реализовав вычисление функции плотности для $t$-распределения Стьюдента по формулам, мы имеем возможность отобразить на графике полученные нами теоретические плотности распределения при разных степенях свободы. 
+
+```{r}
+beta_func <- function(x, y) {
+  return(unlist(integrate(f = function(z){z^(x-1) * (1 - z)^(y-1)},
+                   lower = 0,
+                   upper = 1)[1]))
+}
+
+t_student_distr <- function(x, df) {
+  return(1/(sqrt(df) * beta_func(1/2, df/2)) * ((1 + x^2/df)^(-(df+1)/(2))))
+}
+
+grid <- seq(-4, 4, 0.001)
+plot(grid, dnorm(grid, 0, 1), type = "l", col = "red",
+     main = "Функция плотности t-распределения",
+     xlab = "Теоретические значения выборки",
+     ylab = "Теоретические частоты распределения")
+for (i in seq(1, 10, 2)) {
+  lines(grid, t_student_distr(grid, i), col = (i + 1)/ 2, type = "l")  
+}
+legend(x = -4, y = 0.4, 
+       legend = c("N(0, 1)", paste("df =",seq(1, 10, 2))), 
+       col = c("red", (seq(1, 10, 2) + 1) / 2),
+       lty = 1)
+grid()
+```
+
+На графике выше мы можем наблюдать сходимость графика плотности $t$-распределения к стандартному нормальному распределению при увеличении числа степеней свободы. Отсюда можно качественно делать вывод о правдоподности аналитического определения плотности $t$-распределения по формулам.
+
+Попробуем сгенерировать выборку, удовлетворяющую $t$-распределению Стьюдента с $n$ степенями свободы. Для этого произведем генерацию нормальных случайных величин в количестве равном $n$ с выборками количеством равным $N$. Далее для еще одной сгенерированной стандартной нормальной случайной величины произведем вычисления согласно формулам и получим выборку, распределенную по $t$-распределению с $n$ степенями свободы:
+
+```{r}
+set.seed(123)
+n_distr <- 4
+t_distr <- 0
+N_members <- 1000
+for (i in 1:n_distr)  {
+  normal_new <- rnorm(N_members, 0, 1)
+  t_distr <- t_distr + normal_new^2
+}
+normal_new <- rnorm(N_members, 0, 1)
+t_distr <- normal_new / sqrt(1/n_distr * t_distr)
+
+table_stud <- hist_table(t_distr)
+stud_theor <- dt(table_stud$med, n_distr)
+grid <- seq(-5, 5, 0.001)
+stud_distr <- dt(grid, n_distr)
+
+plot(x = table_stud$low, y = table_stud$rel_freq / table_stud$h, 
+     col = "black", type = "s", pch = 19, 
+     ylim = c(0, max(table_stud$rel_freq / table_stud$h, stud_theor)),
+     xlab = "Значения случайной величины",
+     ylab = "Вероятность появления значения",
+     main = paste0("Сгенерированная выборка с n = ", n_distr))
+lines(x = table_stud$low, y = table_stud$rel_freq / table_stud$h, 
+     col = "black", type = "h", pch = 19)
+lines(x = table_stud$med, y = table_stud$rel_freq / table_stud$h, 
+     col = "black", type = "o", pch = 19)
+lines(max(table_stud$high), 
+      table_stud$rel_freq[nrow(table_stud)] / 
+        table_stud$h[nrow(table_stud)],
+      type = "h")
+segments(x0 = max(table_stud$low),
+         x1 = max(table_stud$high), 
+         y0 = table_stud$rel_freq[nrow(table_stud)]/table_stud$h[nrow(table_stud)],
+         y1 = table_stud$rel_freq[nrow(table_stud)]/table_stud$h[nrow(table_stud)])
+abline(h = 0)
+lines(grid, stud_distr, col = "blue")
+points(table_stud$med, stud_theor, col = "blue", pch = 19)
+legend(x = min(table_stud$low), 
+       y = max(stud_theor),
+       legend = c("Гистограмма", "Теор. распределение"),
+       col = c("black", "blue"),
+       lty = c(1, 1),
+       pch = c(19, 19))
+grid()
+```
+
+
+Для полученных теоретических частот и гистограммы для сгенерированной выборки построим график в координатах друг друга $p_i \sim t(n)$ для простой проверки на распределение. Спрямление получим:
+
+```{r}
+plot(stud_distr, stud_distr, col = "blue", type = "l", 
+     main = paste0("График QQplot для t-распределения, n = ", n_distr),
+     xlab = "Теоретическая вероятность встретить значение",
+     ylab = "Практические частоты")
+points(stud_theor, table_stud$rel_freq / table_stud$h, pch = 19)
+legend(x = 0, y = max(stud_theor),
+       legend = c("Гистограммы", "Теор. частоты"),
+       col = c("black", "blue"),
+       lty = c(0, 1),
+       pch = c(19, 19))
+grid()
+```
+
+И значение коэффициента детерминации: $R^2(y, \hat{y}) =$ `r round(cor(stud_theor, table_stud$rel_freq / table_stud$h)^2, 3)`.
+Значение $R^2$ является довольно высоким, что можно расценивать как положительный тест на распределение Стьюдента.
+
+# **Вопросы на защиту практической работы**
+
+1. Центральная предельная теорема. Реализации случайно распределенных величин. Независимые величины. Степени свободы суммы независимо распределенных величин.
+
+2. Определение нормального распределения. Спрямление для координат нормального распределения. Определение параметров нормального распределения через точечные оценки. Определение параметров нормального распределения, образованного суммой независимых величин, через ЦПТ.
+
+3. Определение распределения Фишера. Аналитические формулы математического ожидания и дисперсии расределения Фишера.
+
+4. t-распределение Стьюдента. Аппроксимации и определение функции плотности. Смесь нормально расределенных величин. Определение $Z$-оценок.

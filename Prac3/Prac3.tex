@@ -1,0 +1,1341 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  14,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{SourceSansPro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Практическая работа №3. Идентификация распределений},
+  pdfauthor={Юрченков Иван Александрович, ассистент кафедры ПМ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Практическая работа №3. Идентификация распределений}
+\author{Юрченков Иван Александрович, ассистент кафедры ПМ}
+\date{2022-10-10}
+
+\begin{document}
+\maketitle
+
+\hypertarget{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}{%
+\section{\texorpdfstring{\textbf{Постановка
+задачи}}{Постановка задачи}}\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}}
+
+Для выполнения практического задания необходимо:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Скачать папку с исходными данными по
+  \href{https://disk.yandex.ru/d/PwFd-L8zn7x8eQ}{ссылке}. Открыть папку,
+  соответствующую своей группе. Далее открыть папку с вариантом,
+  совпадающим с вашим номером в списке.
+\item
+  В папке 6 файлов с данными. Данные имеют различные распределения:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  1 и 4 файлы - нормальное распределение;
+\item
+  2 и 5 файлы - равномерное распределение;
+\item
+  3 и 6 файлы - показательное распределение.
+\end{itemize}
+
+Необходимо идентифицировать распределения в каждом файле двумя
+способами: - с помощью критерия согласия Пирсона; -методом анаморфоз.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Методом Пирсона для каждого файла нужно проверить истинное
+  распределение (то, к которому действительно относятся данные в файле,
+  оно дано выше) и одно ложное. Например, если данные в файле
+  распределены нормально, то нужно проверить нормальное распределение и
+  одно из двух: показательное или равномерное. При расчете теоретических
+  частот в качестве параметров распределений брать их точечные
+  несмещенные оценки.
+\item
+  В отчет вставить гистограммы по каждому файлу, расчетные формулы и
+  результаты проверки распределения.
+\item
+  При проверке распределения методом анаморфоз нужно построить 3 графика
+  для каждого из 6 файлов. Каждый график представлен в координатах
+  соответствующей анаморфозы. Тот график, на котором достигнуто
+  спрямление, соответствует истинному распределению. Для проверки
+  качества спрямления необходимо построить линейный тренд (провести
+  линейную регрессию) и показать значения коэффициента детерминации
+  (\(R^2\)). Он должен быть близок к 1.
+\item
+  По параметрам прямой (угловому коэффициенту и свободному члену) найти
+  параметры распределения. Для построения анаморфозы нормального
+  распределения мат. ожидание заменить его несмещенной точечной оценкой.
+\item
+  В выводах сравнить результаты, полученные двумя способами.
+\end{enumerate}
+
+\hypertarget{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}{%
+\section{\texorpdfstring{\textbf{Теоретическое
+введение}}{Теоретическое введение}}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}}
+
+\hypertarget{ux432ux430ux436ux43dux43eux441ux442ux44c-ux43fux440ux43eux432ux435ux440ux43aux438-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux439}{%
+\subsection{\texorpdfstring{\textbf{Важность проверки
+распределений}}{Важность проверки распределений}}\label{ux432ux430ux436ux43dux43eux441ux442ux44c-ux43fux440ux43eux432ux435ux440ux43aux438-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux439}}
+
+Тестирование гипотезы о подчинении выборки одному из случаных
+распределений играет важную роль в прикладных задачах статистики и
+анализа данных. Важную роль распределения играют:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  В имитационных моделях деятельности системы, т.к. позволяют
+  моделировать очень сложные процессы на основе теоретических
+  распределений вероятности отказа оборудования, времени ответа на
+  звонок покупателя, времени обслуживания клиента, интенсивности
+  поступающих задач и т.п.
+\item
+  В предиктивной аналитике, на основе принадлежности остатков реальных
+  данных и модели можно судить о полноте предсказательной модели ввиду
+  нормальной распределенности остатков вокруг моделируемой зависимости.
+\item
+  В статистике важна процедура проверки гипотез для ситуаций принятия
+  решений на основе данных. Проверку гипотез важно проводить на данных
+  опираясь на известные законы распределений и их уровни значимости и
+  диапазоны случайности.
+\end{enumerate}
+
+Прикладных областей для проверки распределения выборки можно привести
+гораздо больше. Однако, в реальных задачах также может получиться что
+данные не относятся к ранее известным теоретическим распределениям. В
+результате важно уметь пользоваться аппаратом статистики и разрабатывать
+метрики способные нам помочь в решении вышеприведенных задач.
+
+Для решения задачи проверки гипотезы о подчинении выборки ранее
+известным теоретическим распределениям необходимо знать статистические
+критерии проверки гипотез с заранее заданным уровнем надежности. Среди
+множества процедур можно выделить две универсальные:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Проверка гипотез на основе критерия \(\chi^2\)-Пирсона.
+\item
+  Проверка распределений на основе применения процедуры спрямления
+  функциональной зависимости в декартовых координатах с помощью аппарата
+  \textbf{анаморфоз}.
+\end{enumerate}
+
+Также существуют частные случаи проверки гипотез для конкретных
+распределений, например для проверки \textbf{нормальности
+распределения}. Такие критерии важны в угоду большого числа
+статистических процедур, требующих нормальности распределения данных.
+
+\hypertarget{ux44dux442ux430ux43f-ux43fux43eux434ux433ux43eux442ux43eux432ux43aux438-ux434ux430ux43dux43dux44bux445}{%
+\subsection{\texorpdfstring{\textbf{Этап подготовки
+данных}}{Этап подготовки данных}}\label{ux44dux442ux430ux43f-ux43fux43eux434ux433ux43eux442ux43eux432ux43aux438-ux434ux430ux43dux43dux44bux445}}
+
+Пусть дана выборка \(X \in \mathbb{R}^N, N\in \mathbb{N}\), где каждое
+значение выборки представлено вещественным числом и можность множества
+\(X\) равна \(N\):
+
+\[
+X = (x_1, x_2, \dots, x_N), \ x_i \in \mathbb{R}\ , \ i=\overline{1,N}
+\]
+
+Необходимо проверить подчиняется ли \(X\) одному из заранее известных
+законов распределения \(p(x\ |\ \theta)\) с надежностью
+\(\gamma \in (0, 1)\).
+
+Перед применением тестов необходимо сформировать гистограммы данных и
+расcчитать число групп \(g\), границы групп
+\(Z_i,\ i\in \overline{0,g}\), абсолютные и относительные частоты групп
+\((n_j, p_j),\ j \in \overline{1,g}\), опираясь на значения полученной
+выборки данных.
+
+Число групп \(g\) определяется по правилу Стерджеса:
+
+\[
+g = 1 + \lfloor \log_2(N) \rfloor.
+\]
+
+Границы групп рассчитываются по имеющемуся числу групп:
+
+\[
+h = \frac{max(X) - min(X)}{g},
+\]
+
+\[
+Z_i = min(X) + i \cdot h, \ i \in \overline{0, g}.
+\]
+
+Затем необходимо построить вариационный ряд для подсчёта абсолютных и
+относительных частот:
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth,height=\textheight]{hist_table.png}
+\caption{Вариационный ряд для вещественнозначной выборки}
+\end{figure}
+
+Абсолютные частоты \(n_i\) считаются как количество вхождений значений
+из выборки \(X\) в соответствующий \(n_i\) интервал
+\([Z_{i-1}, Z_{i})\).
+
+Остносительные частоты \(p_i\) рассчитываются как:
+
+\[
+p_i = \frac{n_i}{N}, \ i \in \overline{1, g}.
+\]
+
+Середины интервалов \(X_{(i)}\):
+
+\[
+X_{(i)} = \frac{Z_{i} - Z_{i - 1}}{2}, \ i \in \overline{1,g}.
+\]
+
+По результатам расчетов вариационного ряда наступает возможность
+визуализировать практическое приближенное распределение значений выборки
+в виде гистограммы:
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth,height=\textheight]{Statistics-Гистограмма.drawio.png}
+\caption{Гистограмма абсолютных частот известной выборки}
+\end{figure}
+
+При этом все основные показатели моментов распределения можно считать
+дискретно по определению моментов дискретных распределений и получатьт
+точечные несмещенные оценки для:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Математического ожидания
+\end{enumerate}
+
+\[
+\hat{E}[x] = \sum_{i=1}^{g} X_{(i)} \cdot p_{i} \approx E[x],
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Дисперсии
+\end{enumerate}
+
+\[
+\hat{D}[x] = \sum_{i=1}^{g} \left( \left( X_{(i)} - \hat{E}[x] \right)^2 \cdot p_i \right) \approx D[x],
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Среднего квадрата отклонения
+\end{enumerate}
+
+\[
+\hat{\sigma}[x] = \sqrt{\hat{D}[x]} \approx \sigma[x].
+\]
+
+\hypertarget{ux43aux440ux438ux442ux435ux440ux438ux439-ux441ux43eux433ux43bux430ux441ux438ux44f-chi2-ux43fux438ux440ux441ux43eux43dux430}{%
+\subsection{\texorpdfstring{\textbf{Критерий согласия}
+\(\chi^2\)-Пирсона}{Критерий согласия \textbackslash chi\^{}2-Пирсона}}\label{ux43aux440ux438ux442ux435ux440ux438ux439-ux441ux43eux433ux43bux430ux441ux438ux44f-chi2-ux43fux438ux440ux441ux43eux43dux430}}
+
+Проверка на принадлежность выборки известному распределению с помощью
+критерия согласия \(\chi^2\)-Пирсона проводится на основе расчета
+следующей метрики:
+
+\[
+\chi^2 = \sum_{i=1}^{g} \frac{(n_i - n_i^{'})^2}{n_i^{'}}, 
+\]
+
+\[
+n_i^{'} = N \cdot P(X_{(i)} \ |\ \Theta) = N \cdot \left( P(Z_{i}\ | \ \Theta)\ -\ P(Z_{i-1}\ | \ \Theta)  \right),
+\] где
+\(P(x \ | \ \Theta) = \int_{-\infty}^{x}\ p(t\ |\ \theta)\ dt\ -\)
+известная функция распределения, вычисленная с параметрами
+\(\Theta = (\theta_1, \theta_2, \dots)\), которые необходимы для расчета
+значения данной функции.
+
+При проверке принадлежности выборки распределению ставится задача
+проверки гипотезы:
+
+\(H_0\): Выборка \(X\) распределена по известному закону распределения с
+функцией плотности \(p(x\ |\ \Theta)\) с уровнем надежности \(\gamma\).
+
+При проверке гипотезы стоит условиться, что метрика
+\(\chi^2 = \sum_{i=1}^{g} \frac{(n_i - n_i^{'})^2}{n_i^{'}}\)
+распределена по \(\chi^2\), что означает для нас известные диапазоны
+случайности и известные критические значения при проверке гипотезы.
+
+Гипотеза \(H_0\) принимается при \(\chi^2 < \chi_{\gamma, k}^2\), при
+\(k = g - cap(\Theta) - 1\).
+
+\hypertarget{ux438ux437ux432ux435ux441ux442ux43dux44bux435-ux444ux443ux43dux43aux446ux438ux438-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f-ux438-ux444ux443ux43dux43aux446ux438ux438-ux43fux43bux43eux442ux43dux43eux441ux442ux438-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}{%
+\subsection{\texorpdfstring{\textbf{Известные функции распределения и
+функции плотности
+распределения}}{Известные функции распределения и функции плотности распределения}}\label{ux438ux437ux432ux435ux441ux442ux43dux44bux435-ux444ux443ux43dux43aux446ux438ux438-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f-ux438-ux444ux443ux43dux43aux446ux438ux438-ux43fux43bux43eux442ux43dux43eux441ux442ux438-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}}
+
+\hypertarget{ux43dux43eux440ux43cux430ux43bux44cux43dux43eux435-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux435}{%
+\subsubsection{\texorpdfstring{\textbf{Нормальное
+распределение}}{Нормальное распределение}}\label{ux43dux43eux440ux43cux430ux43bux44cux43dux43eux435-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux435}}
+
+Функция плотности нормального распределения \(p(x\ | \ \Theta)\)
+задается следующим образом при известных параметрах
+\(\Theta = (\theta_1 = \mu, \theta_2 = \sigma^2)\):
+
+\[
+p(x \ | \ \Theta) = \frac{1}{\sqrt{2 \pi \sigma^2}} \cdot exp\left({-\frac{(x - \mu)^2}{2 \sigma^2}}\right) ,
+\]
+
+Функция нормального распределения \(P(x\ |\ \Theta)\) задается следующим
+образом при известных параметрах
+\(\Theta = (\theta_1 = \mu, \theta_2 = \sigma^2)\):
+
+\[
+P(x \ | \ \Theta) = \frac{1}{\sqrt{2 \pi \sigma^2}} \cdot \int_{-\infty}^{x} exp\left({-\frac{(t - \mu)^2}{2 \sigma^2}}\right) dt
+\]
+
+Графики функций при \(\Theta = (\mu = 0, \sigma^2 = 1)\) представлены
+ниже:
+
+\[
+\ 
+\]
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-2-1} \end{center}
+
+\(\ \)
+
+\hypertarget{ux440ux430ux432ux43dux43eux43cux435ux440ux43dux43eux435-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux435}{%
+\subsubsection{\texorpdfstring{\textbf{Равномерное
+распределение}}{Равномерное распределение}}\label{ux440ux430ux432ux43dux43eux43cux435ux440ux43dux43eux435-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux435}}
+
+Функция плотности равномерного распределения \(p(x\ | \ \Theta)\)
+задается следующим образом при известных параметрах
+\(\Theta = (\theta_1 = a, \theta_2 = b)\):
+
+\[
+p(x\ | \ \Theta) = \left\{\begin{matrix} 0, & x\in (-\infty, a)\ \cup\ [b, \infty)  \\
+1/(b - a), & x\in [a, b).\end{matrix}\right. , \ E[x] = \frac{b+a}{2}, \ D[x] = \frac{(b-a)^2}{12},
+\] где \(E[x]\ -\) математическое ожидание, \(D[x] \ -\) дисперсия.
+
+Функция равномерного распределения \(P(x\ |\ \Theta)\) задается
+следующим образом при известных параметрах
+\(\Theta = (\theta_1 = a, \theta_2 = b)\):
+
+\[
+\int_{a}^{x} \frac{1}{b-a} dt\ = \left.\ \frac{t}{b-a}\ \right|_{t=a}^{t=x}\ = \frac{x}{b-a} - \frac{a}{b-a} = \frac{1}{b-a} (x - a) 
+\]
+
+\[
+P(x\ |\ \Theta) = \int_{-\infty}^{x} p(t\ |\ \Theta) dt = \left\{
+\begin{matrix} 
+0, & x\in (-\infty, a)  \\
+\frac{1}{b - a} \cdot (x-a) , & x \in [a, b),\\
+1, & x \in [b, \infty).  
+\end{matrix}
+\right.
+\]
+
+Графики функции равномерного распределения и функции плотности
+равномерного распределения с параметрами \(\Theta=(a=-1,\ b = 3)\)
+представлены ниже:
+
+\[
+\ 
+\]
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-3-1} \end{center}
+
+\(\ \)
+
+\hypertarget{ux43fux43eux43aux430ux437ux430ux442ux435ux43bux44cux43dux43eux435-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux435}{%
+\subsubsection{\texorpdfstring{\textbf{Показательное
+распределение}}{Показательное распределение}}\label{ux43fux43eux43aux430ux437ux430ux442ux435ux43bux44cux43dux43eux435-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux435}}
+
+Функция плотности показательного распределения \(p(x\ | \ \Theta)\)
+задается следующим образом при известных параметрах
+\(\Theta = (\theta_1 = \lambda)\):
+
+\[
+p(x\ | \ \Theta) = \lambda \cdot exp(-\lambda x),\  E[x] = \frac{1}{\lambda},\ \ D[x] = \frac{1}{\lambda^2},
+\] где \(E[x]\ -\) математическое ожидание, \(D[x]\ -\) дисперсия.
+
+Функция плотности показательного распределения \(P(x\ | \ \Theta)\)
+задается следующим образом при известных параметрах
+\(\Theta = (\theta_1 = \lambda)\):
+
+\[
+P(x \ | \ \Theta)=\left\{{\begin{matrix}1-e^{{-\lambda x}}&,\;x\geq 0,\\0&,\;x<0.\end{matrix}}\right.
+\]
+
+Графики функции показательного распределения и функции плоности
+показательного распределения для значения параметра \(\lambda = 0.7\)
+представлены ниже:
+
+\[
+\ 
+\]
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+\(\ \)
+
+\hypertarget{ux43fux440ux43eux432ux435ux440ux43aux430-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux439-ux43dux430-ux43eux441ux43dux43eux432ux435-ux43aux440ux438ux442ux435ux440ux438ux44f-ux441ux43eux433ux43bux430ux441ux438ux44f-chi2-ux43fux438ux440ux441ux43eux43dux430}{%
+\subsection{\texorpdfstring{\textbf{Проверка распределений на основе
+критерия согласия
+\(\chi^2\)-Пирсона}}{Проверка распределений на основе критерия согласия \textbackslash chi\^{}2-Пирсона}}\label{ux43fux440ux43eux432ux435ux440ux43aux430-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux439-ux43dux430-ux43eux441ux43dux43eux432ux435-ux43aux440ux438ux442ux435ux440ux438ux44f-ux441ux43eux433ux43bux430ux441ux438ux44f-chi2-ux43fux438ux440ux441ux43eux43dux430}}
+
+Приведем пример проверки выборки на нормальность распределения значений
+на основе расчета значения оценки параметра \(\chi^2\) и проверки
+данного значения на принадлженость распределению \(\chi_{\gamma, k}^2\)
+с \(k = g - cap\Theta - 1\) степенями свободы.
+
+Сгенерируем выборку на основе нормального распределения при помощи
+встроенной в \textbf{R} функции \textbf{rnorm(n, mean, sd)} при
+значениях параметров \(\Theta = (\mu = 26.7, \sigma = 3.5)\)
+
+Для выборки необходимо будет составить таблицу гистограммы, рассчитать
+абсолютные и относительные частоты, середины групп и получить значения
+точечных несмещенных оценок \(\hat{E}[x]\) и \(\hat{\sigma}[x]\) для
+рассматриваемого нами нормального распределения.
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+
+\NormalTok{mu\_param }\OtherTok{\textless{}{-}} \FloatTok{26.7}                         \CommentTok{\# Math Expectation of X\_sample}
+\NormalTok{sigma\_param }\OtherTok{\textless{}{-}} \FloatTok{3.5}                       \CommentTok{\# Sigma of X\_sample}
+\NormalTok{N }\OtherTok{\textless{}{-}} \DecValTok{100}                                 \CommentTok{\# Number of members in X\_sample}
+
+\NormalTok{n\_groups }\OtherTok{=} \DecValTok{1} \SpecialCharTok{+} \FunctionTok{floor}\NormalTok{(}\FunctionTok{log2}\NormalTok{(N))                       }\CommentTok{\# Number of hist groups}
+\NormalTok{X\_sample }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n =}\NormalTok{ N, }
+                        \AttributeTok{mean =}\NormalTok{ mu\_param, }
+                        \AttributeTok{sd =}\NormalTok{ sigma\_param), }\DecValTok{3}\NormalTok{)       }\CommentTok{\# X\_sample generation}
+
+
+\NormalTok{h }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{max}\NormalTok{(X\_sample) }\SpecialCharTok{{-}} \FunctionTok{min}\NormalTok{(X\_sample)) }\SpecialCharTok{/}\NormalTok{ n\_groups     }\CommentTok{\# Hist step}
+
+\NormalTok{Z }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \FunctionTok{min}\NormalTok{(X\_sample),}
+         \AttributeTok{to =} \FunctionTok{max}\NormalTok{(X\_sample),}
+         \AttributeTok{by =}\NormalTok{ h)                                    }\CommentTok{\# Hist boundaries}
+
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ (Z[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ Z[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(Z)]) }\SpecialCharTok{/} \DecValTok{2}                    \CommentTok{\# Hist centers}
+
+\NormalTok{table\_cut }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{values =}\NormalTok{ X\_sample, }
+                        \AttributeTok{groups =} \FunctionTok{cut}\NormalTok{(X\_sample, n\_groups)) }\CommentTok{\# Table of quants}
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(table\_cut))                              }\CommentTok{\# Table of values and groups}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   values      groups
+## 1 24.738 (23.1,25.4]
+## 2 25.894 (25.4,27.6]
+## 3 32.155 (32.1,34.4]
+## 4 26.947 (25.4,27.6]
+## 5 27.153 (25.4,27.6]
+## 6 32.703 (32.1,34.4]
+\end{verbatim}
+
+\(\ \)
+
+Выше мы определили выборку и поставили в соответствие каждому значению
+из выборки его группу, чтобы в дальнейшем сделать группировку по
+факторной переменной (groups).
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# GroupBy \textquotesingle{}groups\textquotesingle{} and calculate Absolute and Relative frequences}
+\NormalTok{table\_hist }\OtherTok{\textless{}{-}}\NormalTok{ table\_cut }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(groups) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{abs\_freq =} \FunctionTok{n}\NormalTok{(),}
+                   \AttributeTok{rel\_freq =} \FunctionTok{n}\NormalTok{()}\SpecialCharTok{/}\NormalTok{N)}
+
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{low }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(Z[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(Z)], }\DecValTok{1}\NormalTok{)           }\CommentTok{\# Lower bound of columns}
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{upp }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(Z[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{)                   }\CommentTok{\# Upper bound of columns}
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{med }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(X, }\DecValTok{1}\NormalTok{)                       }\CommentTok{\# Middle of columns}
+
+\FunctionTok{print}\NormalTok{(table\_hist)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 6
+##   groups      abs_freq rel_freq   low   upp   med
+##   <fct>          <int>    <dbl> <dbl> <dbl> <dbl>
+## 1 (18.6,20.9]        3     0.03  18.6  20.9  19.7
+## 2 (20.9,23.1]       10     0.1   20.9  23.1  22  
+## 3 (23.1,25.4]       17     0.17  23.1  25.4  24.2
+## 4 (25.4,27.6]       29     0.29  25.4  27.6  26.5
+## 5 (27.6,29.9]       22     0.22  27.6  29.9  28.7
+## 6 (29.9,32.1]       13     0.13  29.9  32.1  31  
+## 7 (32.1,34.4]        6     0.06  32.1  34.4  33.2
+\end{verbatim}
+
+\(\ \)
+
+По данной таблице рассчитаем значения для математического ожидания и
+СКО:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu\_sample }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(table\_hist}\SpecialCharTok{$}\NormalTok{med }\SpecialCharTok{*}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq)}
+\FunctionTok{print}\NormalTok{(mu\_sample)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 26.926
+\end{verbatim}
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sd\_sample }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{((table\_hist}\SpecialCharTok{$}\NormalTok{med }\SpecialCharTok{{-}}\NormalTok{ mu\_sample)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq))}
+\FunctionTok{print}\NormalTok{(sd\_sample)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.243567
+\end{verbatim}
+
+\(\ \)
+
+Таким образом мы получили несмещенные точечные оценки для
+математического ожидания и СКО:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  математическое ожидание \(\hat{E}[x] \approx 26.93\)
+\item
+  средний квадрат отклонения от среднего
+  \(\hat{\sigma}[x] \approx 3.24\)
+\end{enumerate}
+
+Отобразим гистограмму полученного эмпирического распределения:
+
+\(\ \)
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-10-1} \end{center}
+
+\(\ \)
+
+Вычислим метрику \(\chi^2\) для эмпирического распределения нашей
+выборки при наличии оцененных параметров нормального распределения. Для
+этого воспользуемся инструментом встроенного интегрирования в \textbf{R}
+\(-\) функцией \textbf{integrate(func, lower, upper, \ldots, abs.tol)}.
+Вычислим на её основе значение интеграла от функции плотности
+нормального распределения при известных оцененных параметрах
+распределения в точке \(x = 25.9\):
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{integrate}\NormalTok{(}\AttributeTok{f =}\NormalTok{ dnorm,               }\CommentTok{\# Func to integrate}
+          \AttributeTok{lower =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,            }\CommentTok{\# Low bound}
+          \AttributeTok{upper =} \FloatTok{25.9}\NormalTok{,            }\CommentTok{\# Upper bound}
+          \AttributeTok{mean =}\NormalTok{ mu\_sample,        }\CommentTok{\# Param1}
+          \AttributeTok{sd =}\NormalTok{ sd\_sample,          }\CommentTok{\# Param2}
+          \AttributeTok{abs.tol =} \DecValTok{0}\NormalTok{)             }\CommentTok{\# Absolute error}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 0.3758804 with absolute error < 8.7e-06
+\end{verbatim}
+
+\(\ \)
+
+Для интеграла получаем значение:
+
+\[
+P(x = 25.9\ |\ \Theta = (\mu = 26.93, \sigma = 3.24)) = \frac{1}{\sqrt{2\pi \sigma}} \int_{-\infty}^{25.9} e^{-\frac{(t-\mu)^2}{2\sigma^2}}  dt = 0.3758804
+\] Протестировав данный метод получения знвчений функции распределения
+вероятностей опишем общий способ нахождения значений нормального
+распределения.
+
+Зададим функцию для вычисления интеграла функции плотности нормального
+распределения:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{interg\_normal }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{low=}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{high=}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{mean\_param=}\DecValTok{0}\NormalTok{, }\AttributeTok{sd\_param=}\DecValTok{1}\NormalTok{) \{}
+  \FunctionTok{unlist}\NormalTok{(}
+    \FunctionTok{integrate}\NormalTok{(}\AttributeTok{f =}\NormalTok{ dnorm, }
+              \AttributeTok{mean =}\NormalTok{ mean\_param, }
+              \AttributeTok{sd=}\NormalTok{sd\_param, }
+              \AttributeTok{lower=}\NormalTok{low, }
+              \AttributeTok{upper=}\NormalTok{high, }
+              \AttributeTok{abs.tol=}\DecValTok{0}\NormalTok{)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{    )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\(\ \)
+
+А также функцию для вычисления значения \(\chi^2\)-метрики:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chisq\_test\_norm }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(table\_hist, mean\_p, sd\_p) \{}
+\NormalTok{  N }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(table\_hist}\SpecialCharTok{$}\NormalTok{abs\_freq)}
+\NormalTok{  prac }\OtherTok{\textless{}{-}}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{abs\_freq}
+\NormalTok{  theor }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(table\_hist))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(table\_hist)) \{}
+\NormalTok{    theor[i] }\OtherTok{\textless{}{-}}\NormalTok{ N }\SpecialCharTok{*}\NormalTok{ (}\FunctionTok{interg\_normal}\NormalTok{(}\AttributeTok{high =}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{upp[i], }
+                                   \AttributeTok{mean\_param =}\NormalTok{ mean\_p, }
+                                   \AttributeTok{sd\_param =}\NormalTok{ sd\_p) }\SpecialCharTok{{-}} 
+                       \FunctionTok{interg\_normal}\NormalTok{(}\AttributeTok{high =}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{low[i], }
+                                     \AttributeTok{mean\_param =}\NormalTok{ mean\_p, }
+                                     \AttributeTok{sd\_param =}\NormalTok{ sd\_p))}
+\NormalTok{  \}}
+\NormalTok{  chisq\_d }\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{((prac }\SpecialCharTok{{-}}\NormalTok{ theor)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{/}\NormalTok{ theor)}
+  \FunctionTok{return}\NormalTok{(chisq\_d)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\(\ \)
+
+Вычислим значение \(chi^2\)-метрики и сравним его с критическим
+значением метрики на правой границе квантиля \(\gamma = 0.95\) для
+\(chi^2\)-распределения с \(k = g - cap\Theta - 1\) степенями свободы:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chisq\_test }\OtherTok{\textless{}{-}} \FunctionTok{chisq\_test\_norm}\NormalTok{(}\AttributeTok{table\_hist =}\NormalTok{ table\_hist, }
+                              \AttributeTok{mean\_p =}\NormalTok{ mu\_sample, }
+                              \AttributeTok{sd\_p =}\NormalTok{ sd\_sample)}
+
+\NormalTok{chisq\_test }\SpecialCharTok{\textless{}} \FunctionTok{qchisq}\NormalTok{(}\AttributeTok{p=}\FloatTok{0.975}\NormalTok{, }\AttributeTok{df =}\NormalTok{ n\_groups }\SpecialCharTok{{-}} \DecValTok{2} \SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\[\ \]
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-15-1} \end{center}
+
+\(\ \)
+
+Полученный результат получился действительно значительно меньше значения
+границы критической области, что уверенно подтверждает принадлежность
+выборки к нормальному распределению.
+
+\hypertarget{ux43fux440ux43eux432ux435ux440ux43aux430-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux439-ux43dux430-ux43eux441ux43dux43eux432ux435-ux430ux43dux430ux43cux43eux440ux444ux43eux437}{%
+\subsection{\texorpdfstring{\textbf{Проверка распределений на основе
+анаморфоз}}{Проверка распределений на основе анаморфоз}}\label{ux43fux440ux43eux432ux435ux440ux43aux430-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux439-ux43dux430-ux43eux441ux43dux43eux432ux435-ux430ux43dux430ux43cux43eux440ux444ux43eux437}}
+
+В истории математики известно понятие абак (доска). Декартов абак
+уравнения с двумя переменными \(f(x,y) = 0\) есть график этого
+уравнения, построенный в системе декартовых координат \(х, у\). При
+построении декартова абака на осях координат могут быть взяты
+функциональные шкалы \(x = φ(u)\), \(y = \psi (v)\).
+
+Такое преобразование называется анаморфозой, если преобразует систему
+намеченных линий абака в прямолинейный пучок. Анаморфоза возможна, если
+уравнение \(f(u,v,w,z)=0\) может быть приведено к виду
+
+\[
+f_1( w) \cdot φ(u) + f_2 (w) \cdot ψ(v) = f_3(w). \ \ \ (a)
+\]
+
+(Уравнения функциональных шкал должны иметь вид
+
+\[
+x = m_1 \cdot φ(u)\ \text{ и }\ y = m_2 \cdot ψ (v) , 
+\] где \(m_1\) и \(m_2\) - модули шкал. Логарифмическая анаморфоза есть
+анаморфоза, произведенная построением на осях координат логарифмических
+шкал. Она возможна для уравнений вида
+
+\[
+f (w) = a \cdot  u^{φ(u)} \cdot v^{ψ(v)} ,
+\] которое логарифмированием приводится к виду (а).
+
+Использование анаморфоз, в которых исходные данные линеаризуется,
+приводит к выделению участков, соответствующих выбранному распределению.
+Таким образом, решается вопрос о выделении участков, на которых исходные
+данные соответствуют тестируемой модели, и определения параметров
+функции аппроксимации, так как они могут быть получены из уравнений этих
+прямых.
+
+Благодаря спрямлению исходных данных в координатах, соответствующих
+определенным распределениям, можно решить вопрос о подборе подходящего
+класса функций на регулярной основе. Путем перебора анаморфоз,
+соответствующих различным вероятностным распределениям, можно выбрать то
+распределение, которое линеаризует исходные данные. Анаморфоза, которая
+спрямляет данные на большем интервале, чем другие, будет иметь наивысший
+ранг значимости.
+
+Построение анаморфоз основано, в частности, на следующих преобразованиях
+координат: логарифмирование, сдвиг и растяжение аргумента, инверсия
+функции или аргумента, сдвиговых фазовых траекториях.
+
+\hypertarget{ux430ux43dux430ux43cux43eux440ux444ux43eux437ux44b-ux43dux43eux440ux43cux430ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}{%
+\subsubsection{\texorpdfstring{\textbf{Анаморфозы нормального
+распределения}}{Анаморфозы нормального распределения}}\label{ux430ux43dux430ux43cux43eux440ux444ux43eux437ux44b-ux43dux43eux440ux43cux430ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}}
+
+Анаморфоза нормального распределения может быть получена из уравнения
+для плотности нормального распределения путем логарифмирования правой и
+левой частей:
+
+\[
+ln(p(x\ |\ \Theta)) = ln\left( \frac{1}{\sqrt{2 \pi \sigma^2}} \cdot exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right) \right),
+\] затем необходимо привести итоговое преобразование координат \[
+ln(p(x_i\ |\ \Theta)) = ln\left( \frac{1}{\sqrt{2 \pi \sigma^2}} \right) - \frac{(x - \mu)^2}{2\sigma^2},
+\]
+
+или, если раскрыть первый логарифм, то
+
+\[
+ln(p(x_i\ |\ \Theta)) = - ln\left(\sqrt{2 \pi \sigma^2} \right) - \frac{(x - \mu)^2}{2\sigma^2}. 
+\]
+
+Если \(y(x_i) = ln(p(x_i\ |\ \Theta))\), а параметры линеаризующей
+прямой
+\(a = - 1/(2\sigma^2), \ b = -ln\left(\sqrt{2 \pi \sigma^2} \right)\),
+то представленное выше уравнение можно переписать в виде уравнения
+прямой для дискретного набора точек
+\((x_i, y_i), \ i \in \overline{1, g}\), которые подчиняются нормальному
+распределению.
+
+Построение данных, соответствующих нормальному распределению, получает
+спрямление в координатах \(ln(p) \sim (x - \mu)^2\) .
+
+Покажем работу анаморфозы на модельных сгенерированных псевдослучайных
+данных с помощью функции \textbf{rnorm} пакета \textbf{R} со значением
+параметров \(\mu = 13.2, \sigma = 0.9\).
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{12}\NormalTok{)}
+
+\NormalTok{N }\OtherTok{\textless{}{-}} \DecValTok{100}                                        \CommentTok{\# Number of rows in sample}
+\NormalTok{mu\_param }\OtherTok{\textless{}{-}} \FloatTok{13.2}                                \CommentTok{\# Mu param}
+\NormalTok{sigma\_param }\OtherTok{\textless{}{-}} \FloatTok{0.9}                              \CommentTok{\# Sigma param}
+\NormalTok{X\_sample }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n =}\NormalTok{ N, }
+                  \AttributeTok{mean =}\NormalTok{ mu\_param, }
+                  \AttributeTok{sd =}\NormalTok{ sigma\_param)             }\CommentTok{\# Sample generation}
+
+\NormalTok{n\_groups }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{+} \FunctionTok{floor}\NormalTok{(}\FunctionTok{log2}\NormalTok{(N))                      }\CommentTok{\# Number of groups}
+
+\NormalTok{h }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{max}\NormalTok{(X\_sample) }\SpecialCharTok{{-}} \FunctionTok{min}\NormalTok{(X\_sample)) }\SpecialCharTok{/}\NormalTok{ n\_groups     }\CommentTok{\# Hist step}
+
+\NormalTok{Z }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \FunctionTok{min}\NormalTok{(X\_sample),}
+         \AttributeTok{to =} \FunctionTok{max}\NormalTok{(X\_sample),}
+         \AttributeTok{by =}\NormalTok{ h)                                    }\CommentTok{\# Hist boundaries}
+
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ (Z[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ Z[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(Z)]) }\SpecialCharTok{/} \DecValTok{2}                    \CommentTok{\# Hist centers}
+
+\NormalTok{table\_cut }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{values =}\NormalTok{ X\_sample, }
+                        \AttributeTok{groups =} \FunctionTok{cut}\NormalTok{(X\_sample, n\_groups)) }\CommentTok{\# Table of quants}
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(table\_cut))                             }\CommentTok{\# Table of values and groups}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     values      groups
+## 1 11.86749 (11.8,12.4]
+## 2 14.61945 (14.5,15.1]
+## 3 12.33893 (11.8,12.4]
+## 4 12.37200 (12.4,12.9]
+## 5 11.40212 (11.3,11.8]
+## 6 12.95493 (12.9,13.4]
+\end{verbatim}
+
+\(\ \)
+
+Приведем пример кода построения таблицы гистограммы для отквантованных
+данных:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# GroupBy \textquotesingle{}groups\textquotesingle{} and calculate Absolute and Relative frequences}
+\NormalTok{table\_hist }\OtherTok{\textless{}{-}}\NormalTok{ table\_cut }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(groups) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{abs\_freq =} \FunctionTok{n}\NormalTok{(),}
+                   \AttributeTok{rel\_freq =} \FunctionTok{n}\NormalTok{()}\SpecialCharTok{/}\NormalTok{N)}
+
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{low }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(Z[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(Z)], }\DecValTok{1}\NormalTok{)           }\CommentTok{\# Lower bound of columns}
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{upp }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(Z[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{)                   }\CommentTok{\# Upper bound of columns}
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{med }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(X, }\DecValTok{1}\NormalTok{)                       }\CommentTok{\# Middle of columns}
+
+\FunctionTok{print}\NormalTok{(table\_hist)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 6
+##   groups      abs_freq rel_freq   low   upp   med
+##   <fct>          <int>    <dbl> <dbl> <dbl> <dbl>
+## 1 (11.3,11.8]        3     0.03  11.3  11.8  11.5
+## 2 (11.8,12.4]       15     0.15  11.8  12.4  12.1
+## 3 (12.4,12.9]       17     0.17  12.4  12.9  12.6
+## 4 (12.9,13.4]       29     0.29  12.9  13.4  13.2
+## 5 (13.4,14]         21     0.21  13.4  14    13.7
+## 6 (14,14.5]         10     0.1   14    14.5  14.3
+## 7 (14.5,15.1]        5     0.05  14.5  15.1  14.8
+\end{verbatim}
+
+\(\ \)
+
+По полученной таблице гистограммы получим возможность рассчитать
+параметры полученного распределения:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu\_sample }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(table\_hist}\SpecialCharTok{$}\NormalTok{med }\SpecialCharTok{*}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq)}
+\NormalTok{sd\_sample }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{((table\_hist}\SpecialCharTok{$}\NormalTok{med }\SpecialCharTok{{-}}\NormalTok{ mu\_sample)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq))}
+\end{Highlighting}
+\end{Shaded}
+
+\(\ \)
+
+Получим значения по выборке для описательных статистик
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  математическое ожидание \(\hat{E}[x] \approx 13.18\),
+\item
+  средний квадрат отклонений \(\hat{\sigma}[x] \approx 0.79\).
+\end{enumerate}
+
+Построим гистограмму относительных частот:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{med,}
+     \AttributeTok{y =}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq,}
+     \AttributeTok{col =} \StringTok{"red"}\NormalTok{,}
+     \AttributeTok{type =} \StringTok{"o"}\NormalTok{,}
+     \AttributeTok{pch =} \DecValTok{19}\NormalTok{,}
+     \AttributeTok{lwd =} \FunctionTok{I}\NormalTok{(}\FloatTok{1.2}\NormalTok{),}
+     \AttributeTok{xlab =} \StringTok{"X(i)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"pi"}\NormalTok{)}
+\FunctionTok{grid}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-19-1} \end{center}
+
+\(\ \)
+
+Построим гистограмму распределения в спрямляющих координатах
+\(ln(p) \sim (x - \hat{E}[x])^2\) по известному полученному значению
+математического ожидания:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ (table\_hist}\SpecialCharTok{$}\NormalTok{med }\SpecialCharTok{{-}}\NormalTok{ mu\_sample)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{,}
+     \AttributeTok{y =} \FunctionTok{log}\NormalTok{(table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq),}
+     \AttributeTok{col =} \StringTok{"red"}\NormalTok{,}
+     \AttributeTok{type =} \StringTok{"o"}\NormalTok{,}
+     \AttributeTok{pch =} \DecValTok{19}\NormalTok{,}
+     \AttributeTok{lwd =} \FunctionTok{I}\NormalTok{(}\FloatTok{1.2}\NormalTok{),}
+     \AttributeTok{xlab =} \StringTok{"X(i)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"ln(pi)"}\NormalTok{)}
+\FunctionTok{grid}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-20-1} \end{center}
+
+\(\ \)
+
+Для полученной зависимости \(ln(p) \sim (x - \hat{E}[x])^2\) необходимо
+методом наименьших квадратов построить линейную модель \(p = ax + b\), и
+найти параметры прямой для определения параметров распределения и
+подсчёта метрики \(R^2\) с целью идентифицировать распределение.
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ln\_p }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq)                }\CommentTok{\# У}
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ (table\_hist}\SpecialCharTok{$}\NormalTok{med }\SpecialCharTok{{-}}\NormalTok{ mu\_param)}\SpecialCharTok{\^{}}\DecValTok{2}              \CommentTok{\# X}
+
+\NormalTok{linear\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_p }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x)                    }\CommentTok{\# Linear model ln\_p of x}
+\NormalTok{a }\OtherTok{\textless{}{-}}\NormalTok{ linear\_model}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{]               }\CommentTok{\# Slope  }
+\NormalTok{b }\OtherTok{\textless{}{-}}\NormalTok{ linear\_model}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{]               }\CommentTok{\# Intercept}
+
+\FunctionTok{print}\NormalTok{(linear\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = ln_p ~ x)
+## 
+## Coefficients:
+## (Intercept)            x  
+##     -1.3363      -0.6979
+\end{verbatim}
+
+\(\ \)
+
+Intercept переводится как пересечение и по смыслу есть значение
+коэффициента \(b = -1.3363\). Коэффициент при переменной является углом
+наклона и по модели есть значение \(a = -0.6979\). Отобразим данную
+модель на графике гистограммы и расчитаем \(R^2\)
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x,}
+     \AttributeTok{y =}\NormalTok{ ln\_p,}
+     \AttributeTok{col =} \StringTok{"red"}\NormalTok{,}
+     \AttributeTok{type =} \StringTok{"o"}\NormalTok{,}
+     \AttributeTok{pch =} \DecValTok{19}\NormalTok{,}
+     \AttributeTok{lwd =} \FunctionTok{I}\NormalTok{(}\FloatTok{1.2}\NormalTok{),}
+     \AttributeTok{xlab =} \StringTok{"X(i)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"ln(pi)"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{a =}\NormalTok{ b, }
+       \AttributeTok{b =}\NormalTok{ a, }
+       \AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }
+       \AttributeTok{lwd =} \FunctionTok{I}\NormalTok{(}\FloatTok{1.2}\NormalTok{))}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \FloatTok{2.25}\NormalTok{, }\AttributeTok{y =} \SpecialCharTok{{-}}\FloatTok{1.4}\NormalTok{, }
+       \AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"ln(p\_i)"}\NormalTok{, }\StringTok{"ax + b"}\NormalTok{), }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{),}
+       \AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{grid}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-22-1} \end{center}
+
+\(\ \)
+
+Расчет \(R^2\) можно произвести воспользовавшись функцией
+\textbf{cor(x,y)} из языка \textbf{R}:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod\_ln\_p }\OtherTok{\textless{}{-}}\NormalTok{ a }\SpecialCharTok{*}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ b}
+\NormalTok{R2 }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(ln\_p, mod\_ln\_p)}\SpecialCharTok{\^{}}\DecValTok{2}
+
+\FunctionTok{print}\NormalTok{(R2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9542276
+\end{verbatim}
+
+\(\ \)
+
+Полученное значение \(R^2 \approx 0.954\), следовательно моделируемая
+зависимость действительно подчиняется нормальному распределению.
+
+Полученные метрики для математического ожидания и дисперсии получаются
+из параметров полученной прямой по результатам построения линейной
+модели по МНК:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Угол наклона прямой: \(a = -1/(2\sigma^2) \approx -0.6979\),
+\item
+  Пересечение с осью \(OY\):
+  \(b = -ln\left(\sqrt{2 \pi \sigma^2} \right) \approx -1.3363\)
+\end{enumerate}
+
+\hypertarget{ux430ux43dux430ux43cux43eux440ux444ux43eux437ux44b-ux43fux43eux43aux430ux437ux430ux442ux435ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}{%
+\subsubsection{\texorpdfstring{\textbf{Анаморфозы показательного
+распределения}}{Анаморфозы показательного распределения}}\label{ux430ux43dux430ux43cux43eux440ux444ux43eux437ux44b-ux43fux43eux43aux430ux437ux430ux442ux435ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}}
+
+Анаморфоза показательного распределения может быть получена из уравнения
+для плотности показательного распределения путем логарифмирования правой
+и левой частей:
+
+\[
+ln(p(x\ |\ \Theta)) = ln(\lambda exp(-\lambda x)),
+\] затем необходимо привести итоговое преобразование координат \[
+ln(p(x_i\ |\ \Theta)) = ln(\lambda) - \lambda \cdot x_i.
+\]
+
+Если \(y(x_i) = ln(p(x_i\ |\ \Theta))\), а параметры линеаризующей
+прямой \(a = -\lambda, \ b = ln(\lambda)\), то представленное выше
+уравнение можно переписать в виде уравнения прямой для дискретного
+набора точек \((x_i, y_i), \ i \in \overline{1, g}\), которые
+подчиняются показательному распределению.
+
+Построение данных, соответствующих экспоненциальному распределению,
+получает спрямление в координатах \(ln(p) \sim x\) .
+
+Покажем работу анаморфозы на модельных сгенерированных псевдослучайных
+данных с помощью функции \textbf{rexp} пакета \textbf{R} со значением
+параметра \(\lambda = 0.87\).
+
+\[\ \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{12}\NormalTok{)}
+
+\NormalTok{N }\OtherTok{\textless{}{-}} \DecValTok{100}                                        \CommentTok{\# Number of rows in sample}
+\NormalTok{lambda\_param }\OtherTok{\textless{}{-}} \FloatTok{0.87}                                \CommentTok{\# Lambda param}
+\NormalTok{X\_sample }\OtherTok{\textless{}{-}} \FunctionTok{rexp}\NormalTok{(}\AttributeTok{n =}\NormalTok{ N, }\AttributeTok{rate =}\NormalTok{ lambda\_param)        }\CommentTok{\# Sample generation}
+
+\NormalTok{n\_groups }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{+} \FunctionTok{floor}\NormalTok{(}\FunctionTok{log2}\NormalTok{(N))                      }\CommentTok{\# Number of groups}
+
+\NormalTok{h }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{max}\NormalTok{(X\_sample)) }\SpecialCharTok{/}\NormalTok{ n\_groups                     }\CommentTok{\# Hist step}
+
+\NormalTok{Z }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \DecValTok{0}\NormalTok{,}
+         \AttributeTok{to =} \FunctionTok{max}\NormalTok{(X\_sample),}
+         \AttributeTok{by =}\NormalTok{ h)                                    }\CommentTok{\# Hist boundaries}
+
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ (Z[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ Z[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(Z)]) }\SpecialCharTok{/} \DecValTok{2}                    \CommentTok{\# Hist centers}
+
+\NormalTok{table\_cut }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{values =}\NormalTok{ X\_sample, }
+                        \AttributeTok{groups =} \FunctionTok{cut}\NormalTok{(X\_sample, Z)) }\CommentTok{\# Table of quants}
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(table\_cut))                             }\CommentTok{\# Table of values and groups}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      values       groups
+## 1 2.5163405  (2.08,2.77]
+## 2 0.7305177 (0.694,1.39]
+## 3 0.1349232    (0,0.694]
+## 4 3.2841938  (2.77,3.47]
+## 5 2.0880165  (2.08,2.77]
+## 6 0.3256675    (0,0.694]
+\end{verbatim}
+
+\(\ \)
+
+Приведем пример кода построения таблицы гистограммы для отквантованных
+данных:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# GroupBy \textquotesingle{}groups\textquotesingle{} and calculate Absolute and Relative frequences}
+\NormalTok{table\_hist }\OtherTok{\textless{}{-}}\NormalTok{ table\_cut }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(groups) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{abs\_freq =} \FunctionTok{n}\NormalTok{(),}
+                   \AttributeTok{rel\_freq =} \FunctionTok{n}\NormalTok{()}\SpecialCharTok{/}\NormalTok{N)}
+
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{low }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(Z[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(Z)], }\DecValTok{2}\NormalTok{)           }\CommentTok{\# Lower bound of columns}
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{upp }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(Z[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\DecValTok{2}\NormalTok{)                   }\CommentTok{\# Upper bound of columns}
+\NormalTok{table\_hist}\SpecialCharTok{$}\NormalTok{med }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(X, }\DecValTok{2}\NormalTok{)                       }\CommentTok{\# Middle of columns}
+
+\FunctionTok{print}\NormalTok{(table\_hist)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 6
+##   groups       abs_freq rel_freq   low   upp   med
+##   <fct>           <int>    <dbl> <dbl> <dbl> <dbl>
+## 1 (0,0.694]          43     0.43  0     0.69  0.35
+## 2 (0.694,1.39]       26     0.26  0.69  1.39  1.04
+## 3 (1.39,2.08]        17     0.17  1.39  2.08  1.73
+## 4 (2.08,2.77]         5     0.05  2.08  2.77  2.43
+## 5 (2.77,3.47]         4     0.04  2.77  3.47  3.12
+## 6 (3.47,4.16]         3     0.03  3.47  4.16  3.82
+## 7 (4.16,4.86]         2     0.02  4.16  4.86  4.51
+\end{verbatim}
+
+\(\ \)
+
+Построим гистограмму относительных частот:
+
+\(\ \)
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-26-1} \end{center}
+
+\(\ \)
+
+Построим гистограмму распределения в спрямляющих координатах
+\(ln(p) \sim x\):
+
+\(\ \)
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-27-1} \end{center}
+
+\(\ \)
+
+Для полученной зависимости \(ln(p) \sim x\) необходимо методом
+наименьших квадратов построить линейную модель \(p = ax + b\), и найти
+параметры прямой для определения параметров распределения и подсчёта
+метрики \(R^2\) с целью идентифицировать распределение.
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ln\_p }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(table\_hist}\SpecialCharTok{$}\NormalTok{rel\_freq)                }\CommentTok{\# У}
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ table\_hist}\SpecialCharTok{$}\NormalTok{med                             }\CommentTok{\# X}
+
+\NormalTok{linear\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_p }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x)                    }\CommentTok{\# Linear model ln\_p of x}
+\NormalTok{a }\OtherTok{\textless{}{-}}\NormalTok{ linear\_model}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{]               }\CommentTok{\# Slope  }
+\NormalTok{b }\OtherTok{\textless{}{-}}\NormalTok{ linear\_model}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{]               }\CommentTok{\# Intercept}
+
+\FunctionTok{print}\NormalTok{(linear\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = ln_p ~ x)
+## 
+## Coefficients:
+## (Intercept)            x  
+##     -0.6425      -0.7705
+\end{verbatim}
+
+\(\ \)
+
+Intercept переводится как пересечение и по смыслу есть значение
+коэффициента \(b = -0.6425\). Коэффициент при переменной является углом
+наклона и по смыслу есть занчение \(a = -0.7705\). Отобразим данную
+модель на графике гистограммы и расчитаем \(R^2\)
+
+\(\ \)
+
+\begin{center}\includegraphics[width=0.75\linewidth]{Prac3_files/figure-latex/unnamed-chunk-29-1} \end{center}
+
+\(\ \)
+
+Расчет \(R^2\) можно произвести воспользовавшись функцией
+\textbf{cor(x,y)} из языка \textbf{R}:
+
+\(\ \)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod\_ln\_p }\OtherTok{\textless{}{-}}\NormalTok{ a }\SpecialCharTok{*}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ b}
+\NormalTok{R2 }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(ln\_p, mod\_ln\_p)}\SpecialCharTok{\^{}}\DecValTok{2}
+
+\FunctionTok{print}\NormalTok{(R2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.956401
+\end{verbatim}
+
+\(\ \)
+
+Полученное значение \(R^2 \approx 0.956\), следовательно моделируемая
+зависимость действительно подчиняется показательному распределению.
+
+Полученные метрики для математического ожидания и дисперсии получаются
+из параметров полученной прямой по результатам построения линейной
+модели по МНК:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  оцениваемый параметр \(\lambda = -a = 0.77\),
+\item
+  математическое ожидание \(\hat{E}[x] = 1/\lambda = 1.3\)
+\end{enumerate}
+
+\hypertarget{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}{%
+\section{\texorpdfstring{\textbf{Темы вопросов на защиту практической
+работы}}{Темы вопросов на защиту практической работы}}\label{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Понятие статистической гипотезы. Нулевая и альтернативная гипотезы.
+  Основные этапы проверки гипотез. Ошибки первого и второго рода.
+\item
+  Предложите пример области науки или прикладной области промышленности
+  и инженерии, в которой критически важным является аппарат проверки
+  гипотез или, в частности, проверки принадлежности выборки одному из
+  известных распределений теории вероятностей.
+\item
+  Понятие статистической гипотезы. Нулевая и альтернативная гипотезы.
+  Критическая область. Лево-, право-, двусторонняя критическая область.
+\item
+  Понятие статистической гипотезы. Нулевая и альтернативная гипотезы.
+  Уровень значимости. Мощность критерия.
+\item
+  Объясните причину по которой принадлежность выборки распределению
+  может быть проверено с помощью критических значений
+  \(\chi^2\)-распределения.
+\item
+  Каковы предпосылки для проверки гипотезы о принадлежности выборки
+  одному из известных распределений на основе аппарата анаморфоз.
+  Ограничения на применение метода анаморфоз при проверке гипотез.
+\item
+  Перечислите возможные преобразования для получения спрямляющих
+  зависимостей известных функций расределения. Предложите перечень
+  преобразований координат для спрямления функции плотности
+  распределения Гомперца в декартовых координатах:
+\end{enumerate}
+
+\[
+p(x\ | \ \theta_1 = A, \theta_2 = k) = A \cdot exp(-k\cdot x) \cdot exp\left(-\frac{A}{k}\cdot exp(-k\cdot x)\right)
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Покажите формулу вычисления метрики \(R^2(y, \hat{y}),\) для
+  \(y \in \mathbb{R}^n\) и \(\hat{y} \in \mathbb{R}^n\). Объясните смысл
+  её показателя и возможный диапазон её значений при:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  \(y(x) = ax + b + e(x)\), где \(e(x)\ -\) функция случайно
+  распределенных значений шума с известным распределением вероятностей,
+  \(y(x)\ -\) вид предполагаемой зависимости данных от координат,
+  \(a, b \in \mathbb{R} \ -\) неизвестные вещественнозначные константы.
+\item
+  \(y(x) = a \cdot f(x) + b + e(x)\), где \(f(x) \ -\) уже неизвестный
+  вид нелинейного преобразования координат, \(a, b \in \mathbb{R} \ -\)
+  неизвестные вещественнозначные константы.
+\end{itemize}
+
+\end{document}

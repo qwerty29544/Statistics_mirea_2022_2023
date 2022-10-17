@@ -1,0 +1,615 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{SourceSansPro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Практическая работа №5. Линейная регрессия. Оценка адекватности модели, оценка доверительных интервалов параметров.},
+  pdfauthor={Юрченков Иван Александрович, ассистент кафедры ПМ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Практическая работа №5. Линейная регрессия. Оценка адекватности
+модели, оценка доверительных интервалов параметров.}
+\author{Юрченков Иван Александрович, ассистент кафедры ПМ}
+\date{2022-10-10}
+
+\begin{document}
+\maketitle
+
+\begin{verbatim}
+## 
+## Присоединяю пакет: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## Следующие объекты скрыты от 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## Следующие объекты скрыты от 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\hypertarget{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438-ux434ux43bux44f-ux432ux44bux43fux43eux43bux43dux435ux43dux438ux44f-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}{%
+\section{\texorpdfstring{\textbf{Постановка задачи для выполнения
+практической
+работы}}{Постановка задачи для выполнения практической работы}}\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438-ux434ux43bux44f-ux432ux44bux43fux43eux43bux43dux435ux43dux438ux44f-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}}
+
+Для выполнения практического задания необходимо:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Открыть папку, соотвествующую своей группе.
+\item
+  Открыть папку с вариантом, совпадающим с вашим номером в списке.
+\end{enumerate}
+
+В папке 3 файла с данными.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  1-ый файл содержит 2 ряда данных. Первый стоблец \$~x\$ содержит
+  факторную переменную, второй столбец \$~y\$ результирующую. Для
+  первого файла необходимо:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Оценить коэффициент корреляции Пирсона \$~r(x, y)\$ между двумя
+  переменными в первом и втором столбце.
+\item
+  По шкале Чеддока оценить хакактеристику корреляционной связи между
+  величинами.
+\item
+  Проверить статистическую значимость коэффициента корреляции Пирсона с
+  помощью \(t\)-статистики.
+\item
+  Построить доверительный интервал для \$~r(x, y)\$ с надежностью
+  \(\ \gamma\ = \ 0.95\).
+\item
+  Построить линейную регрессию между столбцами, оценить значение
+  коэффициентов линейной зависимости.
+\item
+  Оценить значимость полученных коэффициентов прямой.
+\item
+  Построить доверительные интервалы для полученных коэффициентов.
+\item
+  Оценить адекватность модели \emph{по коэффициенту детерминации}.
+\item
+  Оценить интервал прогноза для линейной модели на \$~ft = 3\$ значения
+  вперед.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  2-ой файл содержит 4 ряда данных. Первый ряд (столбец) содержит
+  количественную факторную переменную, следующие два - качественную
+  факторную переменную, последний - результирующую переменную. Для
+  второго файла данных необходимо:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Необходимо с помощью теста Чоу обосновать необходимость деления
+  выборки по одной из качественных факторных переменных.
+\item
+  Произвести разбиение и построить две линейных регрессии, оценить
+  коэффициенты моделей.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  3-ий файл содержит 2 ряда данных. Для третьего файла данных
+  необходимо:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Необходимо двумя способами (тест Спирмена и тест Гольдфельда-Квандта)
+  определить, присутствует ли в данных гетероскедастичность.
+\item
+  Построить линейную регрессию, оценить значения коэффициентов модели.
+\item
+  Оценить значимость полученных коэффициентов и адекватность модели.
+\item
+  Все расчеты проводить для уровня значимости \(\alpha = 0.05\).
+\end{itemize}
+
+\hypertarget{ux43fux440ux438ux43cux435ux440-ux43fux440ux43eux432ux435ux434ux435ux43dux438ux44f-ux440ux435ux433ux440ux435ux441ux441ux438ux43eux43dux43dux43eux433ux43e-ux430ux43dux430ux43bux438ux437ux430-ux434ux43bux44f-ux440ux44fux434ux430-ux434ux430ux43dux43dux44bux445}{%
+\section{\texorpdfstring{\textbf{Пример проведения регрессионного
+анализа для ряда
+данных}}{Пример проведения регрессионного анализа для ряда данных}}\label{ux43fux440ux438ux43cux435ux440-ux43fux440ux43eux432ux435ux434ux435ux43dux438ux44f-ux440ux435ux433ux440ux435ux441ux441ux438ux43eux43dux43dux43eux433ux43e-ux430ux43dux430ux43bux438ux437ux430-ux434ux43bux44f-ux440ux44fux434ux430-ux434ux430ux43dux43dux44bux445}}
+
+\hypertarget{ux438ux441ux441ux43bux435ux434ux443ux435ux43cux44bux439-ux440ux44fux434-ux434ux430ux43dux43dux44bux445}{%
+\subsection{\texorpdfstring{\textbf{Исследуемый ряд
+данных}}{Исследуемый ряд данных}}\label{ux438ux441ux441ux43bux435ux434ux443ux435ux43cux44bux439-ux440ux44fux434-ux434ux430ux43dux43dux44bux445}}
+
+Рассмотрим таблицу переменных парных данных \((x, y)\) одинаковой длины
+без пропущенных значений для данных о цене алмазов (diamonds) с
+категориальными параметрами: \(cut = Ideal\) (огранка), \(color = J\)
+(цвет), \(clarity = SI2\) (чистота).
+
+\begin{verbatim}
+## [1] "x"
+\end{verbatim}
+
+\begin{verbatim}
+## 1 -1.171 
+##  2 0.02 
+##  3 0 
+##  4 0 
+##  5 0.077 
+##  6 0.049 
+##  7 0.01 
+##  8 0.039 
+##  9 0.01 
+##  10 0.058 
+##  11 0.01 
+##  12 0.01 
+##  13 0.03 
+##  14 0.03 
+##  15 0.104 
+##  16 0.104 
+##  17 0.01 
+##  18 0.104 
+##  19 0.049 
+##  20 0.095 
+##  21 0.01 
+##  22 0.131 
+##  23 0.095 
+##  24 0.113 
+##  25 0.03 
+##  26 0.049 
+##  27 0.122 
+##  28 0.174 
+##  29 0.182 
+##  30 0.182 
+##  31 0.095 
+##  32 0.231 
+##  33 0.182 
+##  34 0.215 
+##  35 0.199 
+##  36 0.239 
+##  37 0.231 
+##  38 0.182 
+##  39 0.182 
+##  40 0.239 
+##  41 0.215 
+##  42 0.231 
+##  43 0.239 
+##  44 0.239 
+##  45 0.086 
+##  46 0.207 
+##  47 0.207 
+##  48 0.293 
+##  49 0.293 
+##  50 0.322 
+##  51 0.445 
+##  52 0.322 
+##  53 0.419 
+##  54 0.315 
+##  55 0.507 
+##  56 0.438 
+##  57 0.438 
+##  58 0.464 
+##  59 0.531 
+##  60 0.536 
+##  61 0.571 
+##  62 0.531 
+##  63 0.698 
+##  64 0.723 
+##  65 0.703 
+##  66 0.723 
+##  67 0.708 
+##  68 0.732 
+##  69 0.698 
+##  70 0.718 
+##  71 0.708 
+##  72 0.703 
+##  73 0.728 
+##  74 0.698 
+##  75 0.829 
+##  76 0.698 
+##  77 0.798 
+##  78 0.829 
+##  79 0.829 
+##  80 0.916 
+##  81 0.916 
+##  82 0.904 
+##  83 0.916 
+##  84 0.928 
+##  85 1.102 
+##  86 0.9 
+##  87 0.967 
+##  88 0.959 
+##  89 1.001 
+##  90 0.956 
+##  91 -1.109 
+##  92 -0.892 
+##  93 -0.942 
+##  94 -0.635 
+##  95 -0.673 
+##  96 -0.654 
+##  97 -0.616 
+##  98 -0.635 
+##  99 -0.462 
+##  100 -0.357 
+##  101 -0.357 
+##  102 -0.357 
+##  103 -0.274 
+##  104 -0.342 
+##  105 -0.329 
+##  106 -0.288 
+##  107 -0.357 
+##  108 -0.211 
+##  109 0.02 
+##  110 0
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "y"
+\end{verbatim}
+
+\begin{verbatim}
+## 1 5.841 
+##  2 7.965 
+##  3 8.15 
+##  4 8.168 
+##  5 8.171 
+##  6 8.193 
+##  7 8.225 
+##  8 8.233 
+##  9 8.243 
+##  10 8.277 
+##  11 8.29 
+##  12 8.293 
+##  13 8.296 
+##  14 8.307 
+##  15 8.312 
+##  16 8.317 
+##  17 8.318 
+##  18 8.319 
+##  19 8.325 
+##  20 8.333 
+##  21 8.337 
+##  22 8.346 
+##  23 8.349 
+##  24 8.372 
+##  25 8.377 
+##  26 8.381 
+##  27 8.383 
+##  28 8.414 
+##  29 8.414 
+##  30 8.415 
+##  31 8.439 
+##  32 8.446 
+##  33 8.447 
+##  34 8.448 
+##  35 8.45 
+##  36 8.454 
+##  37 8.464 
+##  38 8.465 
+##  39 8.465 
+##  40 8.472 
+##  41 8.473 
+##  42 8.489 
+##  43 8.503 
+##  44 8.521 
+##  45 8.524 
+##  46 8.534 
+##  47 8.548 
+##  48 8.57 
+##  49 8.586 
+##  50 8.66 
+##  51 8.66 
+##  52 8.694 
+##  53 8.714 
+##  54 8.715 
+##  55 8.76 
+##  56 8.825 
+##  57 8.849 
+##  58 8.876 
+##  59 8.918 
+##  60 8.948 
+##  61 8.958 
+##  62 9.048 
+##  63 9.307 
+##  64 9.327 
+##  65 9.334 
+##  66 9.336 
+##  67 9.389 
+##  68 9.407 
+##  69 9.439 
+##  70 9.446 
+##  71 9.451 
+##  72 9.452 
+##  73 9.455 
+##  74 9.458 
+##  75 9.488 
+##  76 9.492 
+##  77 9.525 
+##  78 9.527 
+##  79 9.582 
+##  80 9.582 
+##  81 9.632 
+##  82 9.644 
+##  83 9.68 
+##  84 9.68 
+##  85 9.683 
+##  86 9.709 
+##  87 9.736 
+##  88 9.753 
+##  89 9.787 
+##  90 9.818 
+##  91 5.903 
+##  92 6.594 
+##  93 6.111 
+##  94 6.752 
+##  95 6.786 
+##  96 6.829 
+##  97 6.886 
+##  98 6.91 
+##  99 6.971 
+##  100 7.477 
+##  101 7.51 
+##  102 7.513 
+##  103 7.514 
+##  104 7.55 
+##  105 7.563 
+##  106 7.573 
+##  107 7.624 
+##  108 7.65 
+##  109 7.867 
+##  110 7.885
+\end{verbatim}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0580}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.1159}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0870}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0580}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.1014}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0870}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0580}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.1014}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0870}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0580}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.1014}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0870}}@{}}
+\caption{Таблица данных}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+x
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+y
+\end{minipage} \\
+\midrule()
+\endhead
+1 & -1.171 & 5.841 & 31 & 0.095 & 8.439 & 61 & 0.571 & 8.958 & 91 &
+-1.109 & 5.903 \\
+2 & 0.020 & & 32 & 0.231 & & 62 & 0.531 & & 92 & & \\
+3 & 0.000 & & 33 & 0.182 & & 63 & 0.698 & & 93 & & \\
+4 & 0.000 & & 34 & 0.215 & & 64 & 0.723 & & 94 & & \\
+5 & 0.077 & & 35 & 0.199 & & 65 & 0.703 & & 95 & & \\
+6 & 0.049 & & 36 & 0.239 & & 66 & 0.723 & & 96 & & \\
+7 & 0.010 & & 37 & 0.231 & & 67 & 0.708 & & 97 & & \\
+8 & 0.039 & & 38 & 0.182 & & 68 & 0.732 & & 98 & & \\
+9 & 0.010 & & 39 & 0.182 & & 69 & 0.698 & & 99 & & \\
+10 & 0.058 & & 40 & 0.239 & & 70 & 0.718 & & 100 & & \\
+11 & 0.010 & & 41 & 0.215 & & 71 & 0.708 & & 101 & & \\
+12 & 0.010 & & 42 & 0.231 & & 72 & 0.703 & & 102 & & \\
+13 & 0.030 & & 43 & 0.239 & & 73 & 0.728 & & 103 & & \\
+14 & 0.030 & & 44 & 0.239 & & 74 & 0.698 & & 104 & & \\
+15 & 0.104 & & 45 & 0.086 & & 75 & 0.829 & & 105 & & \\
+16 & 0.104 & & 46 & 0.207 & & 76 & 0.698 & & 106 & & \\
+17 & 0.010 & & 47 & 0.207 & & 77 & 0.798 & & 107 & & \\
+18 & 0.104 & & 48 & 0.293 & & 78 & 0.829 & & 108 & & \\
+19 & 0.049 & & 49 & 0.293 & & 79 & 0.829 & & 109 & & \\
+20 & 0.095 & & 50 & 0.322 & & 80 & 0.916 & & 110 & & \\
+21 & 0.010 & & 51 & 0.445 & & 81 & 0.916 & & & & \\
+22 & 0.131 & & 52 & 0.322 & & 82 & 0.904 & & & & \\
+23 & 0.095 & & 53 & 0.419 & & 83 & 0.916 & & & & \\
+24 & 0.113 & & 54 & 0.315 & & 84 & 0.928 & & & & \\
+25 & 0.030 & & 55 & 0.507 & & 85 & 1.102 & & & & \\
+26 & 0.049 & & 56 & 0.438 & & 86 & 0.900 & & & & \\
+27 & 0.122 & & 57 & 0.438 & & 87 & 0.967 & & & & \\
+28 & 0.174 & & 58 & 0.464 & & 88 & 0.959 & & & & \\
+29 & 0.182 & & 59 & 0.531 & & 89 & 1.001 & & & & \\
+30 & 0.182 & & 60 & 0.536 & & 90 & 0.956 & & & & \\
+\bottomrule()
+\end{longtable}
+
+В рассматриваемой таблице данных присутствует \(n = 110\) наблюдений для
+каждой из рассматриваемых переменных.
+
+При условии нормальности данных наши описательные статистики для каждой
+переменной выглядят следующим образом:
+
+\[
+\overline{x} = \frac{1}{n} \sum \limits_{i=1}^{n} x_i = 
+\]
+
+\hypertarget{ux43aux43eux440ux440ux435ux43bux44fux446ux438ux43eux43dux43dux44bux439-ux430ux43dux430ux43bux438ux437-ux447ux438ux441ux43bux43eux432ux44bux445-ux434ux430ux43dux43dux44bux445}{%
+\subsection{\texorpdfstring{\textbf{Корреляционный анализ числовых
+данных}}{Корреляционный анализ числовых данных}}\label{ux43aux43eux440ux440ux435ux43bux44fux446ux438ux43eux43dux43dux44bux439-ux430ux43dux430ux43bux438ux437-ux447ux438ux441ux43bux43eux432ux44bux445-ux434ux430ux43dux43dux44bux445}}
+
+\hypertarget{ux442ux435ux441ux442-ux433ux435ux442ux435ux440ux43eux441ux43aux435ux434ux430ux441ux442ux438ux447ux43dux43eux441ux442ux438-ux434ux43bux44f-ux440ux44fux434ux430-ux434ux430ux43dux43dux44bux445}{%
+\subsection{\texorpdfstring{\textbf{Тест гетероскедастичности для ряда
+данных}}{Тест гетероскедастичности для ряда данных}}\label{ux442ux435ux441ux442-ux433ux435ux442ux435ux440ux43eux441ux43aux435ux434ux430ux441ux442ux438ux447ux43dux43eux441ux442ux438-ux434ux43bux44f-ux440ux44fux434ux430-ux434ux430ux43dux43dux44bux445}}
+
+\hypertarget{ux43fux43eux441ux442ux440ux43eux435ux43dux438ux435-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsection{\texorpdfstring{\textbf{Построение линейной модели
+регрессии}}{Построение линейной модели регрессии}}\label{ux43fux43eux441ux442ux440ux43eux435ux43dux438ux435-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+\hypertarget{ux43eux446ux435ux43dux43aux430-ux441ux442ux430ux442ux438ux441ux442ux438ux447ux435ux441ux43aux43eux439-ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux43eux432-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsection{\texorpdfstring{\textbf{Оценка статистической значимости
+коэффициентов линейной модели
+регрессии}}{Оценка статистической значимости коэффициентов линейной модели регрессии}}\label{ux43eux446ux435ux43dux43aux430-ux441ux442ux430ux442ux438ux441ux442ux438ux447ux435ux441ux43aux43eux439-ux437ux43dux430ux447ux438ux43cux43eux441ux442ux438-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux43eux432-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+\hypertarget{ux43eux446ux435ux43dux43aux430-ux430ux434ux435ux43aux432ux430ux442ux43dux43eux441ux442ux438-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsection{\texorpdfstring{\textbf{Оценка адекватности линейной модели
+регрессии}}{Оценка адекватности линейной модели регрессии}}\label{ux43eux446ux435ux43dux43aux430-ux430ux434ux435ux43aux432ux430ux442ux43dux43eux441ux442ux438-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+\hypertarget{ux43eux446ux435ux43dux43aux430-ux43fux440ux43eux433ux43dux43eux437ux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux434ux43bux44f-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}{%
+\subsection{\texorpdfstring{\textbf{Оценка прогнозного интервала для
+линейной модели
+регрессии}}{Оценка прогнозного интервала для линейной модели регрессии}}\label{ux43eux446ux435ux43dux43aux430-ux43fux440ux43eux433ux43dux43eux437ux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux434ux43bux44f-ux43bux438ux43dux435ux439ux43dux43eux439-ux43cux43eux434ux435ux43bux438-ux440ux435ux433ux440ux435ux441ux441ux438ux438}}
+
+\hypertarget{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}{%
+\section{\texorpdfstring{\textbf{Темы вопросов на защиту практической
+работы}}{Темы вопросов на защиту практической работы}}\label{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Задачи корреляционного анализа. Выборочный коэффициент линейной
+  корреляции (Пирсона) и его свойства. Шкала Чеддока.
+\item
+  Выборочный коэффициент линейной корреляции (Пирсона) и его свойства.
+  Оценка значимости коэффициента корреляции.
+\item
+  Корреляция и причинная связь. Проблемы корреляционного анализа.
+\item
+  Ранговая корреляция. Коэффициент ранговой корреляции Спирмена.
+\item
+  Задачи регрессионного анализа. Функциональная и статистическая связь.
+  Аппроксимационные модели. Параметрическое множество функций.
+\item
+  Линейная регрессия. Определение коэффициентов линейной модели методом
+  наименьших квадратов.
+\item
+  Проверка значимости полученных коэффициентов модели. Проверка
+  адекватности модели с помощью критерия Фишера.
+\item
+  Доверительный интервал прогноза. Проверка адекватности модели с
+  помощью критерия Фишера.
+\end{enumerate}
+
+\end{document}

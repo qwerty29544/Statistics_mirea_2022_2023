@@ -1,0 +1,319 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{SourceSansPro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Практическое занятие №2. Интервальные оценки параметров. Доверительные интервалы точечных оценок},
+  pdfauthor={Юрченков Иван Александрович, ассистент кафедры ПМ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Практическое занятие №2. Интервальные оценки параметров.
+Доверительные интервалы точечных оценок}
+\author{Юрченков Иван Александрович, ассистент кафедры ПМ}
+\date{2022-09-11}
+
+\begin{document}
+\maketitle
+
+\hypertarget{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}{%
+\section{\texorpdfstring{\textbf{Постановка
+задачи}}{Постановка задачи}}\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Скачать папку с исходными данными по
+  \href{https://disk.yandex.ru/d/PwFd-L8zn7x8eQ}{ссылке}
+\item
+  Открыть папку соответствующую номеру своей группы
+\item
+  Открыть папку соответствующую номеру своего варианта
+\item
+  В папке \textbf{data} можете найти 4 ряда данных реализации случайной
+  величины
+\item
+  Для каждого из четырех рядов данных необходимо провести следующие
+  расчёты:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Подсчитать выборочные статистики для среднего и стандартного
+  отклонения по следующим формулам:
+\end{itemize}
+
+Выборочное среднее:
+
+\[
+  \overline{X_{B}} = \frac{1}{N} \cdot \sum_{i=1}^{N} x_i,
+\] где \(N \ -\) число значений реализации случайной величины
+(количество значений в ряде данных),
+
+\(x_i \in \mathbb{R}, i \in \overline{1, N} \ -\) реализации нашей
+случайной величины (значения ряда данных).
+
+~
+
+Выборочное среднеквадратическое отклонение:
+
+\[
+\sigma_{B} = \sqrt{\frac{\sum_{i=1}^{N}\left( x_i - \overline{X_{B}}  \right)^2}{N-1}}.
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Для выборочного среднего \(\overline{X_{B}}\) подсчитать границы
+  доверительного интервала по правилу нормального распределния,
+  используя таблицу критических значений функции Лапласа \(\Phi(x)\):
+\end{itemize}
+
+\[
+\hat{X}_{B} \in \left[ \overline{X_{B}} - X_{\gamma} \cdot \frac{\sigma_{B}}{\sqrt{N}}, \overline{X_{B}} + X_{\gamma} \cdot \frac{\sigma_{B}}{\sqrt{N}} \right], \quad \Phi(X_{\gamma}) = \frac{\gamma}{2}
+\]
+
+~
+
+и по правилу t-распределения Стьюдента используя таблицу критических
+значений \(t_{\gamma, n}\) t-распределения:
+
+\[
+\hat{X}_{B} \in \left[ \overline{X_{B}} - t_{1- \gamma, N-1} \cdot \frac{\sigma_{B}}{\sqrt{N}}, \overline{X_{B}} + t_{1-\gamma, N-1} \cdot \frac{\sigma_{B}}{\sqrt{N}} \right]
+\]
+
+при значении уверенности \(\gamma = 0.95\)
+
+\begin{itemize}
+\tightlist
+\item
+  Для выборочного среднеквадратического отклонения \(\sigma_{B}\)
+  подсчитать границы доверительного интервала по оценке
+  \(\chi^2\)-распределения при значении уверенности \(\gamma\) = 0.95:
+\end{itemize}
+
+\[
+\hat{\sigma}_{B} \in \left[ \frac{\sigma_{B}\cdot \sqrt{N-1}}{\sqrt{\chi_{\frac{1+\gamma}{2},N-1}^2}},  \frac{\sigma_{B} \cdot \sqrt{N-1}}{\sqrt{\chi_{\frac{1-\gamma}{2}, N-1}^2}} \right]
+\]
+
+\hypertarget{ux43fux440ux438ux43cux435ux440-ux440ux430ux441ux447ux435ux442ux430}{%
+\section{\texorpdfstring{\textbf{Пример
+расчета}}{Пример расчета}}\label{ux43fux440ux438ux43cux435ux440-ux440ux430ux441ux447ux435ux442ux430}}
+
+\hypertarget{ux434ux430ux43dux43e}{%
+\subsection{\texorpdfstring{\textbf{Дано}}{Дано}}\label{ux434ux430ux43dux43e}}
+
+Дан вещественный ряд данных реализации случайной величины:
+
+\[
+X = \begin{matrix}
+ (1.63, & 1.80, & 1.69, & 1.73, & 1.79, & 1.76\ , \\
+\ 1.77, & 1.91, & 1.70, & 1.69, & 1.50, & 1.94\ , \\ 
+\ 1.90, & 1.61, & 2.10, & 1.62, & 1.79, & 1.58\ , \\
+\ 1.81, & 1.69, & 1.61, & 1.68, & 1.72, & 1.84\ , \\
+\ 1.66, & 1.86, & 1.57, & 1.71, & 1.58, & 1.68)
+\end{matrix}.
+\]
+
+Для данного ряда \(N = 30\).
+
+\hypertarget{ux440ux430ux441ux447ux435ux442-ux432ux44bux431ux43eux440ux43eux447ux43dux44bux445-ux441ux442ux430ux442ux438ux441ux442ux438ux43a}{%
+\subsection{\texorpdfstring{\textbf{Расчет выборочных
+статистик}}{Расчет выборочных статистик}}\label{ux440ux430ux441ux447ux435ux442-ux432ux44bux431ux43eux440ux43eux447ux43dux44bux445-ux441ux442ux430ux442ux438ux441ux442ux438ux43a}}
+
+Для ряда данных \(X\) расчитаем выборочное среднее \(\overline{X_{B}}\):
+
+\(\overline{X_{B}} = \frac{1}{N} \cdot \sum_{i=1}^{N} x_i = \frac{1.63 + 1.8 + 1.69 + \dots + 1.58 + 1.68}{30} \approx\)
+1.731.
+
+Для ряда данных \(X\) расчитаем выборочное СКО \({\sigma_{B}}\):
+
+\(\sigma_{B} = \sqrt{\frac{\sum_{i=1}^{N}\left( x_i - \overline{X_{B}} \right)^2}{N-1}} = \sqrt{\frac{(1.731 - 1.63)^2 + (1.731 - 1.8)^2 + \dots + (1.731 - 1.68)^2}{30-1}} \approx\)
+0.129.
+
+\hypertarget{ux440ux430ux441ux447ux435ux442-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux43dux43eux440ux43cux430ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}{%
+\subsection{\texorpdfstring{\textbf{Расчет доверительного интервала
+нормального
+распределения}}{Расчет доверительного интервала нормального распределения}}\label{ux440ux430ux441ux447ux435ux442-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux43dux43eux440ux43cux430ux43bux44cux43dux43eux433ux43e-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f}}
+
+По полученным \(\overline{X_{B}}\) и \(\sigma_{B}\) получим следующий
+доверительный интервал точечной оценки \(\hat{X}_{B}\) со значением
+уверенности \(\gamma = 0.95\):
+
+\[
+\hat{X}_{B} = \hat{X}_{B} \in \left[ 1.731 - X_{0.95} \cdot \frac{0.129}{\sqrt{30}}, 1.731 + X_{0.95} \cdot \frac{0.129}{\sqrt{30}} \right], \quad \Phi(X_{0.95}) = \frac{0.95}{2} = 0.475
+\]
+
+По таблице критических значений функции Лапласа значение
+\(X_{0.95} = 1.96\). Следовательно доверительный интервал расчитывается
+следующим образом:
+
+\[
+\hat{X}_{B} = \hat{X}_{B} \in \left[ 1.731 - 1.96 \cdot \frac{0.129}{\sqrt{30}}, 1.731 + 1.96 \cdot \frac{0.129}{\sqrt{30}} \right], \quad \Phi(X_{0.95}) = \frac{0.95}{2} = 0.475.
+\]
+
+И доверительный интервал равен:
+
+\[
+\hat{X}_{B} = \hat{X}_{B} \in \left[ 1.731 - 1.96 \cdot \frac{0.129}{\sqrt{30}}, 1.731 + 1.96 \cdot \frac{0.129}{\sqrt{30}} \right],
+\]
+
+или
+
+\[
+\hat{X}_{B} = \hat{X}_{B} \in \left[ 1.685,\, 1.777 \right].
+\]
+
+\hypertarget{ux440ux430ux441ux447ux435ux442-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux43fux43e-t-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44e-ux441ux442ux44cux44eux434ux435ux43dux442ux430}{%
+\subsection{\texorpdfstring{\textbf{Расчет доверительного интервала по
+t-распределению
+Стьюдента}}{Расчет доверительного интервала по t-распределению Стьюдента}}\label{ux440ux430ux441ux447ux435ux442-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux43fux43e-t-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44e-ux441ux442ux44cux44eux434ux435ux43dux442ux430}}
+
+По полученным \(\overline{X_{B}}\) и \(\sigma_{B}\) получим следующий
+доверительный интервал точечной оценки \(\hat{X}_{B}\) со значением
+уверенности \(\gamma = 0.95\):
+
+\[
+\hat{X}_{B} = \hat{X}_{B} \in \left[ 1.731 - t_{0.05, 29} \cdot \frac{0.129}{\sqrt{30}}, 1.731 + t_{0.05, 29} \cdot \frac{0.129}{\sqrt{30}} \right].
+\]
+
+По таблице критических значений t-распределения Стьюдента значение
+\(t_{0.05, 29} = 2.05\). Следовательно доверительный интервал
+расчитывается следующим образом:
+
+\[
+\hat{X}_{B} = \hat{X}_{B} \in \left[ 1.731 - 2.05 \cdot \frac{0.129}{\sqrt{30}}, 1.731 + 2.05 \cdot \frac{0.129}{\sqrt{30}} \right].
+\]
+
+Итоговый доверительный интервал для точечной оценки выборочного среднего
+равен:
+
+\[
+\hat{X}_{B} = \hat{X}_{B} \in \left[ 1.683,\, 1.779 \right].
+\]
+
+Доверительный интервал для точечной оценки выборочного среднего по
+t-распределению Стьюдента оказался шире чем интервал расчитаный по
+нормальному расределению, что является ожидаемым результатом поскольку
+распределение Стьюдента является более пологим в хвостах при малых
+значениях степеней свободы реализации случайной величины.
+
+\hypertarget{ux440ux430ux441ux447ux435ux442-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux441ux440ux435ux434ux43dux435ux433ux43e-ux43aux432ux430ux434ux440ux430ux442ux430-ux43eux442ux43aux43bux43eux43dux435ux43dux438ux44f}{%
+\subsection{\texorpdfstring{\textbf{Расчет доверительного интервала
+среднего квадрата
+отклонения}}{Расчет доверительного интервала среднего квадрата отклонения}}\label{ux440ux430ux441ux447ux435ux442-ux434ux43eux432ux435ux440ux438ux442ux435ux43bux44cux43dux43eux433ux43e-ux438ux43dux442ux435ux440ux432ux430ux43bux430-ux441ux440ux435ux434ux43dux435ux433ux43e-ux43aux432ux430ux434ux440ux430ux442ux430-ux43eux442ux43aux43bux43eux43dux435ux43dux438ux44f}}
+
+Точечные оценки выборочной дисперсии являются распределенными по
+\(\chi^2\)-распределению, что делает возможным оценивать с помощью
+квантилей \(\alpha_{1, 2}=\frac{1 \pm \gamma}{2}\) доверительные
+интервалы как для точечной оценки дисперсии выборки с малыми степенями
+свободы, так и для точечной оценки СКО.
+
+Доверительный интервал точечной оценки \(\hat{\sigma}_{B}\) СКО по
+известным \(\sigma_{B} = 0.129\) и \(N = 30\) при \(\gamma = 0.95\)
+расчитывается следующим образом:
+
+\[
+\hat{\sigma}_{B} \in \left[ \frac{0.129 \cdot \sqrt{29}}{\sqrt{\chi_{0.975, 29}^2}},  \frac{0.129 \cdot \sqrt{29}}{\sqrt{\chi_{0.025, 29}^2}} \right].
+\]
+
+Из таблицы квантилей \(\chi^2\)-распределения найдем значения для
+\(\chi_{0.975, 29}^2\) и \(\chi_{0.025, 29}^2\):
+
+\[
+\chi_{0.975, 29}^2 = 45.7, \quad \chi_{0.025, 29}^2 = 16.0,
+\]
+
+и доверительный интервал для точечной оценки СКО равен:
+
+\[
+\hat{\sigma}_{B} \in \left[ \frac{0.129 \cdot \sqrt{29}}{\sqrt{45.7}},  \frac{0.129 \cdot \sqrt{29}}{\sqrt{16.0}} \right].
+\]
+
+\[
+\hat{\sigma}_{B} \in \left[ 0.103,\, 0.174 \right].
+\]
+
+\hypertarget{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}{%
+\section{\texorpdfstring{\textbf{Темы вопросов на защиту практической
+работы}}{Темы вопросов на защиту практической работы}}\label{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Определение состоятельности, смещенности и эффективности для точечных
+  оценок параметров выборки.
+\item
+  Понятие квантилей, квартилей и децилей в исследовании доверительных
+  интервалов точечных оценок параметров. Распределение точечных оценок
+  параметров.
+\item
+  \(Z\)-оценки и предпосылки для определения доверительных интервалов
+  точечных оценок на основе нормального распределения.
+\item
+  Использование \(t\)-распределения Стьюдента в определении
+  доверительных интервалов точечных оценок. Различия между
+  \(t\)-распределением и нормальным распределением.
+\item
+  Предпосылки использования \(\chi^2\)-распределения в определении
+  доверительных интервалов точечных оценок выборочного СКО.
+\end{enumerate}
+
+\end{document}
