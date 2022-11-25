@@ -2,18 +2,19 @@
 title: "Практическая работа №3. Идентификация распределений"
 author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
 date: "`r Sys.Date()`"
-mainfont: SourceSansPro
-fontsize: 14
 output:
-  pdf_document: 
+  word_document: default
+  pdf_document:
     latex_engine: lualatex
     keep_tex: yes
     highlight: tango
     fig_width: 7
     fig_height: 5.5
     fig_caption: yes
-editor_options: 
-  markdown: 
+fontsize: 14
+mainfont: SourceSansPro
+editor_options:
+  markdown:
     wrap: 72
 ---
 

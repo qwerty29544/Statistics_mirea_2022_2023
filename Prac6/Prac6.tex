@@ -1,0 +1,479 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{SourceSansPro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{#1}
+\newcommand{\BaseNTok}[1]{#1}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.00,0.50,0.50}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{#1}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.00,1.00}{#1}}
+\newcommand{\DataTypeTok}[1]{#1}
+\newcommand{\DecValTok}[1]{#1}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{#1}
+\newcommand{\FunctionTok}[1]{#1}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.00,1.00}{#1}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{#1}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{1.00,0.25,0.00}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{1.00,0.25,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.50,0.50}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.00,0.50,0.50}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.00,0.50,0.50}{#1}}
+\newcommand{\VariableTok}[1]{#1}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.00,0.50,0.50}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Практическая работа №6. Сглаживание временных рядов},
+  pdfauthor={Юрченков Иван Александрович, ассистент кафедры ПМ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Практическая работа №6. Сглаживание временных рядов}
+\author{Юрченков Иван Александрович, ассистент кафедры ПМ}
+\date{2022-11-23}
+
+\begin{document}
+\maketitle
+
+\hypertarget{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}{%
+\section{\texorpdfstring{\textbf{Постановка
+задачи}}{Постановка задачи}}\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}}
+
+Для выполнения практического задания необходимо: 1. открыть папку,
+соответствующую своей группе; 2. открыть папку с вариантом, совпадающим
+с вашим номером в списке.
+
+В папке два файла, которые содержат разные временные ряды. В первом
+файле находится ряд с синусоидальным трендом. Во втором - с линейным.
+
+Необходимо выделить тренд используя 4 метода: 1. простое скользящее
+среднее (SMA); 2. взвешенное скользящее среднее (WMA) особо типа; 3.
+экспоненциальное сглаживание (EMA); 4. двойное экспоненциальное
+сглаживание (DEMA).
+
+Каждый метод требует подбора некоторых параметров:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  SMA и WMA - размер окна, EMA - параметр сглаживания A, DEMA - параметр
+  сглаживания вокруг тренда A и параметр сглаживания самого тренда B.
+\end{enumerate}
+
+Для весов в WMA использовать экспоненциальную весовую функцию:
+
+\[
+\omega_i = \varepsilon \cdot  \frac{e ^{-\varepsilon \cdot |i|}}{\sum\limits_{j=-m}^{m} e ^{-\varepsilon \cdot |j|}};\ \ i = -m, (-m+1), \dots, m;\ \ \varepsilon = 0.1.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Необходимо подобрать оптимальные значения соотвествующих параметров,
+  используя Q-статистику Льюнг-Бокса при m = 5. Оптимальными параметрами
+  будем считать те, что минимизируют приведенную статистику.
+\item
+  В качестве размеров окна \(w = 2 * m + 1\) перебрать значения
+  \(m\ =\ 3,\ 5,\ 7,\ 9\); в качестве параметров сглаживания:
+  \(\alpha,\ \gamma = 0.1, 0.2, \dots, 0.9\). Обратите внимание, что
+  метод DEMA двухпараметрический, что требует выбрать оптимальную
+  комбинацию сразу двух параметров \(\alpha, \gamma\).
+\item
+  После подбора оптимальных параметров провести тест Дарбина-Уотсона
+  \((m = 1, \alpha = 0.95)\) на данных после исключения выделенного
+  тренда для каждого метода и каждого ряда.
+\item
+  В отчете изобразить графики исходных данных, графики трендов при
+  оптимальных параметрах у каждого метода для каждого ряда, расчетные
+  формулы, а также результаты тестов Дарбина-Уотсона.
+\end{enumerate}
+
+\hypertarget{ux43fux440ux438ux43cux435ux440-ux432ux44bux43fux43eux43bux43dux435ux43dux438ux44f}{%
+\section{\texorpdfstring{\textbf{Пример
+выполнения}}{Пример выполнения}}\label{ux43fux440ux438ux43cux435ux440-ux432ux44bux43fux43eux43bux43dux435ux43dux438ux44f}}
+
+\hypertarget{ux441ux43aux43eux43bux44cux437ux44fux449ux435ux435-ux441ux440ux435ux434ux43dux435ux435}{%
+\subsection{\texorpdfstring{\textbf{Скользящее
+среднее}}{Скользящее среднее}}\label{ux441ux43aux43eux43bux44cux437ux44fux449ux435ux435-ux441ux440ux435ux434ux43dux435ux435}}
+
+Метод простого скользящего среднего, с размером окна
+\(w = 2 \cdot m + 1\), где \(m\ -\) количество членов ряда в сумме по
+одной стороне от центрального значения, является частным случаем метода
+взвешенного скользящего среднего с равными весовыми коэффициентами:
+
+\[
+\overset{\sim}{y_t} = \sum\limits_{i = -m}^{m} \omega_i \cdot y_{t+i}, \quad \omega_i = \frac{1}{2 \cdot m + 1},
+\] где \(y_t\ -\) исходные значения временного ряда в дискретных
+отсчётах \(t\), \(\omega_i\ -\) весовые коэффициенты окна сглаживания,
+\(\overset{\sim}{y_t}\ -\) сглаженный ряд данных \(y_t\).
+
+Существует понятная проблема с крайними членами ряда. Представим
+ситуацию скользящего среднего для ряда данных \(y_t\) с окном с
+\(m = 2\). Изобразим на рисунке исходный ряд и окно сглаживания в виде
+массива, между которыми происходит операция свёртки:
+
+\(\ \)
+
+\begin{figure}
+\centering
+\includegraphics{Statistics-Свёртка1.drawio.png}
+\caption{Массив исходного ряда и окно свёртки на первом шаге}
+\end{figure}
+
+\(\ \)
+
+Как показано на рисунке выше, сглаживание при помощи операции свертки с
+весовым окном не дает в классическом виде возможность получить в
+сглаженном ряде данных такое же количество элементов массива. Для
+проведения операции такой свёртки, окну необходимы крайние элементы, а
+центральный отображается в сглаженный первый элемент. Другими словами,
+чем больше окно сглаживания у нас будет, тем большее количество членов
+ряду будет отниматься в результате сглаживания.
+
+Покажем также на рисунке полную картину такого сглаживания:
+
+\(\ \)
+
+\begin{figure}
+\centering
+\includegraphics{Statistics-Свёртка2.drawio.png}
+\caption{Массив исходного ряда и окно свёртки на последнем шаге}
+\end{figure}
+
+\(\ \)
+
+По изображению выше видно, что в нашем частном случае с обоих концов
+ряда удаляются по \(m = 2\) значений с каждой стороны. Такую проблему в
+обработке изображений решают с помощью операции отступа (padding) на
+заданное количество единиц измерений с каждой стороны. С точки зрения
+обработки изображений, к картинке с каждой стороны добавляют значение
+\(0\), для того, чтобы не вносить шум от краев изображения в модель
+обработки.
+
+\(\ \)
+
+\begin{figure}
+\centering
+\includegraphics{padding_conv2d.jpeg}
+\caption{Отступ в обработке изображений для невелирования эффекта сжатия
+изображения в процессе свёртки}
+\end{figure}
+
+\(\ \)
+
+Так же, как и в задачах обработки изображений, мы имеем возможность
+добавить отступ с каждой стороны, чтобы невелировать эффект сжатия ряда.
+Однако, данный отступ необходимо делать первым значением в начале ряда и
+последним значением в конце ряда соответсвенно по \(m\) раз с каждой
+стороны, чтобы первые элементы сглаженного ряда не были занижены по
+уровню значений по сравнению с исходным рядом:
+
+\(\ \)
+
+\begin{figure}
+\centering
+\includegraphics{Statistics-Свертка3.drawio.png}
+\caption{Свёртка одномерного временного ряда с отступом с каждой
+стороны}
+\end{figure}
+
+\(\ \)
+
+\textbf{Стоит сказать, что при сравнимо с размерами ряда больших
+значениях окна, метод отступа будет порождать большие ошибки
+сглаживания, так как будет вносить нетипичные значения ряда. Так что
+злоупотреблять данной техникой бывает опасно.}
+
+Таким образом, получаем алгоритм простого скользящего среднего для
+сглаживания временного ряда с заданным размером окна \(m\).
+Продемонстрируем его работу на массиве данных авиаперевозок
+\(AirPassengers\), а также на ряде данных уровня воды в озере Гурон.
+
+Построим для временного ряда данных \(AirPassengers\) график и график
+его сглаживания по методу \(SMA\) с размером окна \(m = 4\),
+\(w = 2\cdot m + 1 = 9\). Данный временной ряд не является стационарным,
+поскольку его значения разброса вокруг линейного тренда растут с ростом
+значения этого тренда (гетероскедастичность).
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+На графике видно, как сглаженная реализация все еще имеет в себе
+периодическую компоненту относительно тренда, и логично использовать
+близкие к \(m = 5, 6\) значения окон для сглаживания, чтобы избавиться
+от влияния сезонности и рассмотреть именно сам тренд
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-5-1} \end{center}
+
+Для значений временного ряда \(LakeHuron\) уровня воды озера Гурон
+построим также график и реализацию сглаживания простым методом
+скользящего среднего.
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+Познакомившись с простым методом скользящего среднего далее переходим к
+обобщенному взвешенному скользящему среднему.
+
+\hypertarget{ux432ux437ux432ux435ux448ux435ux43dux43dux43eux435-ux441ux43aux43eux43bux44cux437ux44fux449ux435ux435-ux441ux440ux435ux434ux43dux435ux435}{%
+\subsection{\texorpdfstring{\textbf{Взвешенное скользящее
+среднее}}{Взвешенное скользящее среднее}}\label{ux432ux437ux432ux435ux448ux435ux43dux43dux43eux435-ux441ux43aux43eux43bux44cux437ux44fux449ux435ux435-ux441ux440ux435ux434ux43dux435ux435}}
+
+Метод взвешенного скользящего среднего работает идентично методу
+простого скользящего среднего, за исключением необходимости определять
+саму весовую функцию метода сглаживания. Весовая функция \(-\) метод
+определения значений весов исходя из определенного правила отображения
+номера элемента окна в его значение.
+
+Весовых функций на практике встречается довольно много, и все их можно
+применять:
+
+\includegraphics{Weight_funcs.png} Из рисунка выше видно, что в методе
+простого скользящего среднего было использовано \textbf{П-окно}. В
+данной практике вам предлагается использовать экспоненциальную весовую
+функцию, также именуемую как \textbf{Пуассоновское сглаживание}:
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-8-1} \end{center}
+
+Черными точками по оси ординат можно отследить значение веса в окне
+сглаживания алгоритма взвешенного скользящего среднего.
+
+Приведем пример работы сглаживания по данным авиаперевозок и уровня воды
+в озере Гурон.
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-9-1} \end{center}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-10-1} \end{center}
+
+\hypertarget{ux44dux43aux441ux43fux43eux43dux435ux43dux446ux438ux430ux43bux44cux43dux43eux435-ux441ux433ux43bux430ux436ux438ux432ux430ux43dux438ux435}{%
+\subsection{\texorpdfstring{\textbf{Экспоненциальное
+сглаживание}}{Экспоненциальное сглаживание}}\label{ux44dux43aux441ux43fux43eux43dux435ux43dux446ux438ux430ux43bux44cux43dux43eux435-ux441ux433ux43bux430ux436ux438ux432ux430ux43dux438ux435}}
+
+Экспоненциальное сглаживание - алгоритм, позволяющий рекуррентно
+оценивать новые значения сглаженного ряда по исходным данным, применяя
+следующие соотношения:
+
+\[
+\overset{\sim}{y}_t = \left\{ \begin{matrix} y_t, & t = 1,\\
+\overset{\sim}{y}_{t-1} + \alpha\cdot (\overset{\sim}{y}_t - \overset{\sim}{y}_{t-1}), & t > 1,\end{matrix} \right.
+\]
+
+или
+
+\[
+\overset{\sim}{y}_t = \left\{ \begin{matrix} y_t, & t = 1,\\
+\alpha \cdot \overset{\sim}{y}_t + (1 - \alpha) \cdot \overset{\sim}{y}_{t-1}, & t > 1,\end{matrix} \right.
+\]
+
+где \(\alpha\ -\) коэффициент сглаживания (сила сглаживания) принимает
+значения в диапазоне от 0 до 1 в действительной области.
+
+Коэффициент \(\alpha\) влияет на степень восприятия истории. Чем ниже
+значение коэффициента, тем сильнее происходит именно сглаживание.
+Поскольку величины \(\alpha\) и \((1 - \alpha)\) взаимнообратные,
+следовательно смысл коэффициента \(\alpha\) разнится с точностью до
+смены места их расстановки в зависимости выше.
+
+Покажем работу алгоритма сглаживания на значениях ряда уровня воды озера
+Гурон
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-12-1} \end{center}
+
+\hypertarget{ux434ux432ux43eux439ux43dux43eux435-ux44dux43aux441ux43fux43eux43dux435ux43dux446ux438ux430ux43bux44cux43dux43eux435-ux441ux433ux43bux430ux436ux438ux432ux430ux43dux438ux435}{%
+\subsection{\texorpdfstring{\textbf{Двойное экспоненциальное
+сглаживание}}{Двойное экспоненциальное сглаживание}}\label{ux434ux432ux43eux439ux43dux43eux435-ux44dux43aux441ux43fux43eux43dux435ux43dux446ux438ux430ux43bux44cux43dux43eux435-ux441ux433ux43bux430ux436ux438ux432ux430ux43dux438ux435}}
+
+Двойное экспоненциальное сглаживание осуществляется по следующим
+формулам с коэффициентами \(\alpha,\gamma\), варьирующихся в пределах от
+\(0\) до \(1\) в действительной оси.
+
+\[
+\overset{\sim}{y}_t = \alpha \cdot y_t + (1-\alpha) \cdot (\overset{\sim}{y}_{t-1}+b_{t-1}),
+\]
+
+\[
+b_t = \gamma \cdot (\overset{\sim}{y}_t - \overset{\sim}{y}_{t-1}) + (1-\gamma) \cdot b_{t-1},
+\]
+
+\[
+\overset{\sim}{y}_1=y_1,\ \  b_1=y_2-y_1
+\]
+
+Продемонстрируем работу двойного экспоненциального сглаживания на
+примере временного ряда уровня воды в озере Гурон:
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Prac6_files/figure-latex/unnamed-chunk-14-1} \end{center}
+
+Первый \(\alpha\) отвечает за сглаживание ряда вокруг тренда, второй
+\(\gamma\) --- за сглаживание самого тренда. Чем выше значения, тем
+больший вес будет отдаваться последним наблюдениям и тем менее
+сглаженным окажется модельный ряд. Комбинации параметров могут выдавать
+достаточно причудливые результаты, особенно если задавать их руками.
+
+\hypertarget{q-ux441ux442ux430ux442ux438ux441ux442ux438ux43aux430-ux43bux44cux44eux43dux433-ux431ux43eux43aux441ux430}{%
+\subsection{\texorpdfstring{\textbf{Q-статистика
+Льюнг-Бокса}}{Q-статистика Льюнг-Бокса}}\label{q-ux441ux442ux430ux442ux438ux441ux442ux438ux43aux430-ux43bux44cux44eux43dux433-ux431ux43eux43aux441ux430}}
+
+Временной ряд можно сглаживать по нескольким причинам, среди которых две
+очевидные:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Избавиться от случайных значений ряда вокруг тренда и сезонности и
+  выделить их более значительно.
+\item
+  Выделить тренд, сгладив и случайные компоненты и сезонность вокруг
+  тренда по известному колчиеству дней периода сезонной компоненты.
+\end{enumerate}
+
+В каждом из выделенных случаев, проверка адекватности алгоритма
+сглаживания проводится по-разному. Для начала выделяют остатки ряда
+данных \[e_t = y_t - \overset{\sim}{y_t}\], которые записываются
+отдельным временным рядом с теми же отсчётами. \textbf{Обратите
+внимание, что для методов сглаживания с окном (SMA, WMA) приходится либо
+рассматривать сглаженный ряд с дополненными исходными значениями ряда по
+краям, либо делать отступ перед сглаживанием}.
+
+Для второго случая, когда необходимо просто выделить тренд из данных
+достаточно проверить остатки на нулевое среднее. Если среднее остатков
+не находится около нуля, то тренд найден недостаточно хорошо. Проверки
+на выявления сезонности вместе с трендом не существует в общем
+употреблении.
+
+Для первого случая проверка намного сложнее. Для остатков нам необходимо
+убедиться в отсутствии их авкоррелированности на заданное количество
+лагов назад. Если автокорреляционная функция остатков \(e_t\) резко
+убывает (и находится около нуля), то остатки не коррелируют друг с
+другом и, похоже, что они случайны.
+
+В качестве статистики для проверки отсутсвия автокорреляции остатков
+выступает Q-Статистика Льюнг-Бокса:
+
+\[
+Q = n \cdot (n - 2) \cdot \sum \limits_{k=1}^{m}\frac{r(k)^2}{n-k},
+\] где \(r(k)\ -\) выборочная оценка автокорреляционной функции в лаге
+\(k\) от текущего наблюдения: \[
+r(k) = \frac{(n-k)\cdot \sum\limits_{t=1}^{n-k}x_t \cdot x_{t+k} - \sum\limits_{t=1}^{n-k} x_t \sum\limits_{t=1}^{n-k} x_{t+k}}{\sqrt{(n-k)\sum\limits_{t=1}^{n-k}x_t^2 - (\sum\limits_{t=1}^{n-k}x_t)^2} \cdot \sqrt{(n-k)\sum\limits_{t=1}^{n-k}x_{t + k}^2 - (\sum\limits_{t=1}^{n-k}x_{t+k})^2}}
+\]
+
+Считается, что полученная величина имеет распределение \(\chi^2\) c
+\(m\) степенями свободы. Если \(Q\) оказывается больше критического
+значения, то признается наличие автокорреляции до \(m\)-ого порядка в
+исследуемом ряду. Иначе считается, что автокорреляции нет и остатки
+признаются случайными.
+
+В пакете R существует функция \(Box.test(x, lag, type="Ljung-Box")\),
+которая предоставляет возможность тестировать ряд на автокорреляцию.
+Необходимо посчитать остатки и провести тест.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Box.test}\NormalTok{(}\AttributeTok{x =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{flights }\SpecialCharTok{{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{flights\_smoothed\_DEMA, }\AttributeTok{lag =} \DecValTok{5}\NormalTok{, }\AttributeTok{type =} \StringTok{"Ljung{-}Box"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box-Ljung test
+## 
+## data:  df$flights - df$flights_smoothed_DEMA
+## X-squared = 190.95, df = 5, p-value < 2.2e-16
+\end{verbatim}
+
+\hypertarget{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}{%
+\section{\texorpdfstring{\textbf{Темы вопросов на защиту практической
+работы}}{Темы вопросов на защиту практической работы}}\label{ux442ux435ux43cux44b-ux432ux43eux43fux440ux43eux441ux43eux432-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Понятие временного ряда (ВР). Стационарность и нестационарность ВР.
+  Примеры ВР. Аддитивная и мультипликативная модели ВР
+\item
+  Методы сглаживания ВР: MA, WMA, SMA, EMA.
+\item
+  Лаговый оператор. Модели с распределенным лагом. Лаги Алмон.
+\item
+  Тест Дарбина-Уотсона.
+\item
+  Q-стастистика Льюнга-Бокса и применение для подбора параметров
+  статистических моделей обработки данных.
+\end{enumerate}
+
+\end{document}

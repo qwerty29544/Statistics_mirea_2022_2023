@@ -1,0 +1,286 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{SourceSansPro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Практическая работа №1. Первичная обработка данных},
+  pdfauthor={Юрченков Иван Александрович, ассистент кафедры ПМ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Практическая работа №1. Первичная обработка данных}
+\author{Юрченков Иван Александрович, ассистент кафедры ПМ}
+\date{2022-10-22}
+
+\begin{document}
+\maketitle
+
+\hypertarget{ux432ux432ux435ux434ux435ux43dux438ux435}{%
+\section{\texorpdfstring{\textbf{Введение}}{Введение}}\label{ux432ux432ux435ux434ux435ux43dux438ux435}}
+
+Для прикладных задач математической статистики базовым элементом анализа
+статистических данных является процедура первичного исследования
+имеющихся выборок. В процедуру первичного исследования входят такие
+техники, как построение вариационных таблиц для оценки эмпирического
+распределения данных, оценка выборочных статистик, оценка вариабельности
+данных и построение графиков гистограмм выборочных переменных для
+визуального анализа на принадлежность выборки к одному из теоретических
+распределений, на наличие выбросов и характерных паттернов. Данные
+задачи решаются не в отрыве от устоявшейся процедуры статистического
+анализа данных, а наборот являются базой для проведения других более
+сложных статистических процедур, позволяющих нам получать ответы на
+важные вопросы на основе данных.
+
+Современные задачи статистики выполняются, в основном, с применением
+компьютерных вычислительных средств, языков программирования и
+статистических пакетов для выполнения сложных процедур обработки данных
+над всё большим их числом. Тенденция к росту объема накопленной
+статистической информации подогревает интерес к высокопроизводительным
+компьютерным вычислениям, так что без современных инструментов базовые
+задачи анализа выборки чаще всего уже не решаются.
+
+Однако при большом засилии статистических программных продуктов и сред
+разработки конвейеров обработки больших данных, за которыми скрыты
+преднаписанные алгоритмы, концепции, приемы и техники проведения
+первичного анализа данных важны для изучения и полного освоения будущими
+специалистами данной области. Получение полного испчерпывающего знания о
+практических приложениях обработки статистических данных и способов
+расчета и проведения статистических процедур позволяет двигаться дальше
+в направлении изучения науки о данных с большей скоростью и пониманием
+за счет взаимосвязи большинства методов и концепций на более высоком
+уровне.
+
+\hypertarget{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}{%
+\subsection{\texorpdfstring{\textbf{Цель
+работы}}{Цель работы}}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}}
+
+Данная практическая работа ставит перед собой задачу познакомить с
+процессом вычисления стандартных описательных статистик для выборок
+данных раазличных типов и научить использовать методы агрегации
+статистических данных с целью получения новых знаний об их эмпирическом
+распределении.
+
+\hypertarget{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}{%
+\section{\texorpdfstring{\textbf{Постановка
+задачи}}{Постановка задачи}}\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}}
+
+Для выполнения задачи 1 раздела необходимо разбиться на две подгруппы.
+
+Студенты первой подгруппы должны собрать со всей учебной группы данные о
+росте в сантиметрах и данные о месяцах рождения.
+
+Студенты второй подгруппы должны собрать со всей учебной группы данные о
+росте в сантиметрах и данные о загаданном случайном целом числе на
+интервале {[}0; 8{]}.
+
+Для целочисленных данных необходимо:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Построить вариационный ряд распределения абсолютных и относительных
+  частот появления событий по выборке дискретных данных.
+\item
+  Построить полигон относительных частот для событий вариационного ряда.
+\item
+  Вычислить эмпирическую функцию распределения и построить её график.
+\item
+  Рассчитать выборочные описательные статистики:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  среднее \(\ \overline{x}\ \);
+\item
+  математическое ожидание \(\ \mu_x\);
+\item
+  дисперсию \(\ D_{x}\ \);
+\item
+  стандартное отклонение \(\ \sigma_{x}\);
+\item
+  среднеквадратическое отклонение \(\ \hat{\sigma}_x\);
+\item
+  медиану зафиксированной выборки \(\ m_x\);
+\item
+  первый и третий квартиль \(\ \tau_{x,\ 0.25},\ \tau_{x,\ 0.75}\);
+\item
+  межквартильный размах \(\ IQR_x\);
+\item
+  коэффициент вариации \(\ \nu_{x}\).
+\end{itemize}
+
+Для вещественных данных необходимо:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Рассчитать число групп \(\ g\ \), необходимых для квантования исходных
+  данных по правилу Стёрджесса.
+\item
+  Вычислить значения границ групп \(\ Z_i, i=0, 1, \dots, g\ \) для
+  значений выборки по правилу фиксированной величины интервала.
+\item
+  Построить вариационный ряд для выборки интервальных данных.
+\item
+  Построить гистограмму распределения относительных частот для
+  рассчитанных интервалов выборки.
+\item
+  Вычислить эмпирическую функцию распределения и построить её график.
+\item
+  Рассчитать выборочные описательные статистики:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  среднее \(\ \overline{x}\ \);
+\item
+  математическое ожидание \(\ \mu_x\);
+\item
+  дисперсию c использованием выборочного среднего \(\ D_{x}\ \);
+\item
+  стандартное отклонение \(\ \sigma_{x}\);
+\item
+  среднеквадратическое отклонение \(\ \hat{\sigma}_x\);
+\item
+  медиану зафиксированной выборки \(\ m_x\);
+\item
+  первый и третий квартиль \(\ \tau_{x,\ 0.25},\ \tau_{x,\ 0.75}\);
+\item
+  межквартильный размах \(\ IQR_x\);
+\item
+  коэффициент вариации \(\ \nu_{x}\).
+\end{itemize}
+
+\hypertarget{ux43fux440ux438ux43cux435ux440-ux440ux430ux441ux447ux435ux442ux430}{%
+\section{\texorpdfstring{\textbf{Пример
+расчета}}{Пример расчета}}\label{ux43fux440ux438ux43cux435ux440-ux440ux430ux441ux447ux435ux442ux430}}
+
+На рассмотрение выносится набор данных или выборка с двумя переменными,
+целочисленного \(X_1\) и вещественного \(X_2\) типа:
+
+\[
+\begin{pmatrix}
+X_1\\
+x_{11} \\
+x_{12} \\
+x_{13} \\
+\vdots \\
+x_{1n}
+\end{pmatrix} 
+\begin{pmatrix}
+X_2\\
+x_{21} \\
+x_{22} \\
+x_{23} \\
+\vdots \\
+x_{2n}
+\end{pmatrix}
+\]
+
+Выборочное среднее целочисленных данных рассчитывается по соотношению:
+
+\[
+\overline{x} = \frac{1}{n} \sum\limits_{i=1}^{n} x_i.
+\]
+
+Математическое ожидание целочисленных данных рассчитывается по
+определению математического ожидания дискретного ряда:
+
+\[
+\mu_x = \sum\limits_{i=1}^{g} x_i \cdot p_i.
+\]
+
+Дисперсия целочисленных данных рассчитывается по определению дисперсии
+дискретного ряда с использованием выборочного среднего:
+
+\[
+D_x = \sum\limits_{i=1}^{g}\left( \zeta_i - \overline{x}  \right)^2 \cdot p_i.
+\]
+
+Стандартное отклонение с использованием дисперсии:
+
+\[
+\sigma_x = \sqrt{D_x} = \sqrt{\sum\limits_{i=1}^{g}\left( \zeta_i - \overline{x}  \right)^2 \cdot p_i}.
+\]
+
+Среднеквадратическое отклонение:
+
+\[
+\hat{\sigma}_x = \sqrt{\frac{1}{n-1} \cdot \sum\limits_{i=1}^{n}(\overline{x} - x_i)^2}.
+\]
+
+Медиана выборки \(-\) серединное значение отсортированной выборки:
+
+\[
+[x] = sort(x),\quad 
+m_x = \left\{
+\begin{matrix}
+[x]_{n/2}, & \ n\  - \text{ нечетное}, \\ 
+\left([x]_{\lfloor n/2 \rfloor} + [x]_{\lceil n/2 \rceil}\right)/2, & \ n\  - \text{ четное}.
+\end{matrix}
+\right.
+\]
+
+\hypertarget{ux432ux43eux43fux440ux43eux441ux44b-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}{%
+\section{\texorpdfstring{\textbf{Вопросы на защиту практической
+работы}}{Вопросы на защиту практической работы}}\label{ux432ux43eux43fux440ux43eux441ux44b-ux43dux430-ux437ux430ux449ux438ux442ux443-ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux439-ux440ux430ux431ux43eux442ux44b}}
+
+\end{document}

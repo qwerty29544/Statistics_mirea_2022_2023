@@ -1,16 +1,18 @@
 ---
-title: "Практическая работа №5. Линейная регрессия. Оценка адекватности модели, оценка доверительных интервалов параметров."
+title: Практическая работа №5. Линейная регрессия. Оценка адекватности модели, оценка
+  доверительных интервалов параметров.
 author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
 date: "`r Sys.Date()`"
-mainfont: SourceSansPro
 output:
-  pdf_document: 
+  word_document: default
+  pdf_document:
     latex_engine: lualatex
     keep_tex: yes
     highlight: haddock
     fig_width: 8
     fig_height: 7
     fig_caption: yes
+mainfont: SourceSansPro
 ---
 
 ```{r, include=FALSE}
