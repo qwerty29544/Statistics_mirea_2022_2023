@@ -1,6 +1,5 @@
 ---
 title: "Практическая работа №3. Идентификация распределений"
-author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
 date: "`r Sys.Date()`"
 output:
   word_document: default
@@ -8,8 +7,8 @@ output:
     latex_engine: lualatex
     keep_tex: yes
     highlight: tango
-    fig_width: 7
-    fig_height: 5.5
+    fig_width: 8
+    fig_height: 7
     fig_caption: yes
 fontsize: 14
 mainfont: SourceSansPro
@@ -19,7 +18,7 @@ editor_options:
 ---
 
 ```{r, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE, dev="cairo_pdf")
+knitr::opts_chunk$set(echo = TRUE, dev="cairo_pdf", out.width = "67%", fig.align = "center")
 ```
 
 # **Постановка задачи**

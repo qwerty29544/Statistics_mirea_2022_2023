@@ -1,18 +1,17 @@
 ---
 title: Практическое занятие №2. Интервальные оценки параметров. Доверительные интервалы
   точечных оценок
-author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
 date: "`r Sys.Date()`"
 mainfont: SourceSansPro
 output:
+  word_document:
+    toc: yes
   pdf_document:
     toc: no
     number_sections: no
     latex_engine: lualatex
     keep_tex: yes
     highlight: haddock
-  word_document:
-    toc: yes
   html_document:
     toc: yes
     df_print: paged

@@ -1,10 +1,11 @@
 ---
-title: "Практическая работа 4. Генерация распределений. Проверка определений известных распределений"
-author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
+title: Практическая работа 4. Генерация распределений. Проверка определений известных
+  распределений
 date: "`r Sys.Date()`"
 mainfont: SourceSansPro
 output:
-  pdf_document: 
+  word_document: default
+  pdf_document:
     latex_engine: lualatex
     keep_tex: yes
     highlight: haddock

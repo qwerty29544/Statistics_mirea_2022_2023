@@ -2,15 +2,16 @@
 title: "Практическая работа №6. Сглаживание временных рядов"
 author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
 date: "`r Sys.Date()`"
-mainfont: SourceSansPro
 output:
-  pdf_document: 
+  word_document: default
+  pdf_document:
     latex_engine: lualatex
     keep_tex: yes
     highlight: haddock
     fig_width: 8
     fig_height: 7
     fig_caption: yes
+mainfont: SourceSansPro
 ---
 
 
@@ -43,7 +44,7 @@ library(GGally)
 Для весов в WMA использовать экспоненциальную весовую функцию: 
 
 $$
-\omega_i = \varepsilon \cdot  \frac{e ^{-\varepsilon \cdot |i|}}{\sum\limits_{j=-m}^{m} e ^{-\varepsilon \cdot |j|}};\ \ i = -m, (-m+1), \dots, m;\ \ \varepsilon = 0.1.
+\omega_i = \frac{e ^{-\varepsilon \cdot |i|}}{\sum\limits_{j=-m}^{m} e ^{-\varepsilon \cdot |j|}};\ \ i = -m, (-m+1), \dots, m;\ \ \varepsilon = 0.3.
 $$
 
 2. Необходимо подобрать оптимальные значения соотвествующих параметров, используя Q-статистику Льюнг-Бокса при m = 5. Оптимальными параметрами будем считать те, что минимизируют приведенную статистику.
@@ -249,8 +250,8 @@ exponential_weights <- function(eps, w) {
 ```
 
 ```{r}
-plot(x = -7:7, y = exponential_weights(0.5, w = 15), type ="o", pch = 19, 
-     main = "Экспоненциальная весовая функция, eps = 0.5",
+plot(x = -7:7, y = exponential_weights(0.3, w = 15), type ="o", pch = 19, 
+     main = "Экспоненциальная весовая функция, eps = 0.3",
      xlab = "Номер веса в ядре сглаживания",
      ylab = "Значение веса")
 grid()
@@ -310,14 +311,14 @@ grid()
 
 $$
 \overset{\sim}{y}_t = \left\{ \begin{matrix} y_t, & t = 1,\\
-\overset{\sim}{y}_{t-1} + \alpha\cdot (\overset{\sim}{y}_t - \overset{\sim}{y}_{t-1}), & t > 1,\end{matrix} \right.
+\overset{\sim}{y}_{t-1} + \alpha\cdot ({y}_t - \overset{\sim}{y}_{t-1}), & t > 1,\end{matrix} \right.
 $$
 
 или
 
 $$
 \overset{\sim}{y}_t = \left\{ \begin{matrix} y_t, & t = 1,\\
-\alpha \cdot \overset{\sim}{y}_t + (1 - \alpha) \cdot \overset{\sim}{y}_{t-1}, & t > 1,\end{matrix} \right.
+\alpha \cdot {y}_t + (1 - \alpha) \cdot \overset{\sim}{y}_{t-1}, & t > 1,\end{matrix} \right.
 $$
 
 где $\alpha\ -$ коэффициент сглаживания (сила сглаживания) принимает значения в диапазоне от 0 до 1 в действительной области.
