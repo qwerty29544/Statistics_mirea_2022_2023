@@ -253,7 +253,7 @@ exponential_weights <- function(eps, w) {
 plot(x = -7:7, y = exponential_weights(0.3, w = 15), type ="o", pch = 19, 
      main = "Экспоненциальная весовая функция, eps = 0.3",
      xlab = "Номер веса в ядре сглаживания",
-     ylab = "Значение веса")
+     ylab = "Значение веса", col = "#FF00AA")
 grid()
 ```
 
