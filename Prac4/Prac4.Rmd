@@ -4,18 +4,14 @@ title: Практическая работа 4. Генерация распре�
 date: "`r Sys.Date()`"
 mainfont: SourceSansPro
 output:
-  word_document: default
-  pdf_document:
-    latex_engine: lualatex
-    keep_tex: yes
-    highlight: haddock
+  word_document: 
     fig_width: 8
-    fig_height: 7.5
+    fig_height: 8
     fig_caption: yes
 ---
 
 ```{r, echo=FALSE, results='hide', error=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, dev="cairo_pdf", dpi = 500, out.width="60%", fig.align='center')
+knitr::opts_chunk$set(echo = FALSE, dpi = 500, out.width="60%", fig.align='center')
 library(dplyr)
 library(stringr)
 ```

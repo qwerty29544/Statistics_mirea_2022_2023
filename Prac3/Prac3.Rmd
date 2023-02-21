@@ -2,23 +2,17 @@
 title: "Практическая работа №3. Идентификация распределений"
 date: "`r Sys.Date()`"
 output:
-  word_document: default
-  pdf_document:
-    latex_engine: lualatex
-    keep_tex: yes
-    highlight: tango
+  word_document: 
     fig_width: 8
-    fig_height: 7
+    fig_height: 8
     fig_caption: yes
-fontsize: 14
-mainfont: SourceSansPro
 editor_options:
   markdown:
     wrap: 72
 ---
 
 ```{r, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE, dev="cairo_pdf", out.width = "67%", fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, out.width = "67%", fig.align = "center")
 ```
 
 # **Постановка задачи**

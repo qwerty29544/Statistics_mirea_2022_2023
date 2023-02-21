@@ -3,20 +3,15 @@ title: "Практическая работа №6. Сглаживание вр�
 author: "Юрченков Иван Александрович, ассистент кафедры ПМ"
 date: "`r Sys.Date()`"
 output:
-  word_document: default
-  pdf_document:
-    latex_engine: lualatex
-    keep_tex: yes
-    highlight: haddock
+  word_document: 
     fig_width: 8
-    fig_height: 7
+    fig_height: 8
     fig_caption: yes
-mainfont: SourceSansPro
 ---
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, dev="cairo_pdf", dpi = 500, out.width="60%", fig.align='center')
+knitr::opts_chunk$set(echo = FALSE, dpi = 500, out.width="60%", fig.align='center')
 library(dplyr)
 library(stringr)
 library(ggplot2)
